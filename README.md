@@ -6,7 +6,7 @@ This folder of code contains tools for extracting, plotting, and computing with 
 
 These tools were developed by **Skylar Callis**. They developed this code while working as a post-bachelors student at [Los Alamos National Lab](https://www.lanl.gov/?source=globalheader) from 2022 - 2024. To see what they are up to these days, visit [Skylar's Website ](https://skylar-jean.com).
 
-To generate the most up-to-date documetaion, run the following commands in the ./docs/ directory:
+To generate the most up-to-date documetaion, run the following commands in the `./docs/` directory:
 
  - `make clean` to remove existing build docs
  - `make html` to create the new docs
