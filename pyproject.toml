@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "feature-interpretability"
+version = "0.1.0"
+description = "Contains scripts & tools for extracting, plotting, and computing with features extracted from neural networks."
+authors = ["Skylar Callis <sjcallis@lanl.gov>"]
+readme = "README.md"
+packages = [
+	{include = "scripts"},
+	{include = "fns", from = "src"},
+	]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
