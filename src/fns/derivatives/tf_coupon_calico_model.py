@@ -5,7 +5,7 @@ Defines the calico model for the branched tensorflow coupon models
 Execution will print unit test information, perform unit tests, and print the results to the terminal.
 
 Input Line:
-``python tf_coupon_calico_model.py -M ../../../../network_files/tfmodels/study_02_221216_prad2tepla_deterministic_model_0100.h5 -IF pRad -IN ../../../../network_files/coupondata/r60um_tpl210_complete_idx00095.npz -DF ../../../../network_files/coupondata/design_res60um_tepla_study220620_MASTER.csv -L activation_15``
+``python tf_coupon_calico_model.py -M ../../../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -IN ../../../examples/tf_coupon/data/r60um_tpl112_complete_idx00110.npz -DF ../../../examples/tf_coupon/coupon_design_file.csv -L activation_15``
 """
 
 #############################
@@ -233,7 +233,7 @@ if __name__ == '__main__':
 	cont_y, cont_x, cont_ft = calico.input_shape[1][1:4]
 	cont_ones= np.ones((cont_y, cont_x, cont_ft))
 	design_df = pd.read_csv(design_path,
-		                    sep=', ',
+		                    sep=',',
 		                    header=0,
 		                    index_col=0,
 		                    engine='python')
