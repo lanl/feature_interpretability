@@ -5,7 +5,7 @@ Defines the calico model for the single branch pytorch nested cylinder models
 Execution will print unit test information, perform unit tests, and print the results to the terminal.
 
 Input Line:
-``python pyt_nestedcyl_calico_model.py -M ../../../../network_files/pytmodels/checkpoint_V0.3_Epoch1000.pth -IF hr_MOICyl -IN ../../../../network_files/nestedcyldata/ncyl_sclPTW_299_pvi_idx00130.npz -DF ../../../../network_files/nestedcyldata/runsKey.csv -L interpActivations.14``
+``python pyt_nestedcyl_calico_model.py -M ../../../examples/pyt_nestedcyl/trained_hrMOICyl2sclPTW_model.pth -IF hr_MOICyl -IN ../../../examples/pyt_nestedcyl/data/ncyl_sclPTW_002_pvi_idx00130.npz -DF ../../../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interpActivations.14``
 """
 
 #############################
@@ -207,7 +207,6 @@ if __name__ == '__main__':
 	#############################
 	## Load Model
 	model_class = 'NCylANN_V1'
-	sys.path.append(os.path.abspath('../../../../../syntheticnestedcyldata/'))
 	model = pytc.fts.load_model(model_path, model_class, device)
 
 	## Model Prints
