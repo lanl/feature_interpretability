@@ -5,7 +5,7 @@ Defines the pytorch dataset class for the single branch pytorch nested cylinder 
 Execution will print test information, perform tests, and print the results to the terminal.
 
 Input Line:
-``python pyt_nestedcyl_calico_dataloader.py -M ../../../../network_files/pytmodels/checkpoint_V0.3_Epoch1000.pth -IF hr_MOICyl -ID /data/nested_cyl_230428/ -DF ../../../../network_files/nestedcyldata/runsKey.csv``
+``python pyt_nestedcyl_calico_dataloader.py -M ../../../examples/pyt_nestedcyl/trained_hrMOICyl2sclPTW_model.pth -IF hr_MOICyl -ID ../../../examples/pyt_nestedcyl/data/ -DF ../../../examples/pyt_nestedcyl/nestedcyl_design_file.csv``
 """
 
 #############################
@@ -212,7 +212,7 @@ if __name__ == '__main__':
 
 
 	## Evaluate the Sequence
-	imgs, ptws = next(iter(dataloader))
+	imgs, ptws, ids = next(iter(dataloader))
 	data_length = len(dataloader.dataset)
 
 	## Delete the Samples .txt file
@@ -232,3 +232,4 @@ if __name__ == '__main__':
 	print('Calico DataLoader Get Item Results:\n')
 	print('Image input array shape:', imgs.shape)
 	print('Ground truth array shape:', ptws.shape)
+	print('Sample identification array shape:', np.shape(ids))
