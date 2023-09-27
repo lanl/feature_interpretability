@@ -27,8 +27,8 @@ def load_model_class(model_class: str):
 	    Returns:
 			No Return Objects
     """
-	sys.path.append(os.path.abspath('../../../syntheticnestedcyldata/'))
-	globals()[model_class] = __import__(model_class)
+	exec('import fns.pytorchcustom.'+model_class+' as '+model_class)
+	globals()[model_class] = eval(model_class)
 
 def load_model(model_path: str, model_class: str, device: torch.device):
 	""" Function to import a pytorch model from a saved checkpoint
