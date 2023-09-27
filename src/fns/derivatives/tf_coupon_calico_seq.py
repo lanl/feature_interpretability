@@ -5,7 +5,7 @@ Contains the keras sequence classes to use with the when calculating feature der
 Execution will print unit test information, perform unit tests, and print the results to the terminal.
 
 Input Line:
-``python tf_coupon_calico_seq.py -M ../../../../network_files/tfmodels/study_02_221216_prad2tepla_deterministic_model_0100.h5 -IF pRad -ID ../../../../network_files/coupondata/ -DF ../../../../network_files/coupondata/design_res60um_tepla_study220620_MASTER.csv -NF ../../../../network_files/coupondata/r60um_normalization.npz -L activation_15 -T 1 -NS 40``
+``python tf_coupon_calico_seq.py -M ../../../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -ID ../../../examples/tf_coupon/data/ -DF ../../../examples/tf_coupon/coupon_design_file.csv -NF ../../../examples/tf_coupon/coupon_normalization.npz -L activation_15 -T 1 -NS 40``
 """
 
 #############################
