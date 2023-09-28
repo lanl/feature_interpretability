@@ -32,3 +32,9 @@ Calico Functions (pytorchcustom.calico)
 
 .. automodule:: fns.pytorchcustom.calico
     :members:
+
+Nested Cylinder Model Definition (pytorchcustom.NCylANN_V1)
+============================================================
+
+.. automodule:: fns.pytorchcustom.NCylANN_V1
+    :members:
