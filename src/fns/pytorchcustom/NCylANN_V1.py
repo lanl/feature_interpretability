@@ -2,7 +2,7 @@
 """
 Contains the model class for the pytorch nested cylinder models.
 
-Named **N**ested **Cyl**inder **A**rtificial **N**eural **N**etwork **V**ersion **1**
+Named **N**\ ested **Cyl**\ inder **A**\ rtificial **N**\ eural **N**\ etwork **V**\ ersion **1**
 """
 
 #############################
@@ -15,6 +15,18 @@ import torch.nn as nn
 ## Model Definition
 #############################
 class NCylANN_V1(nn.Module):
+    """ Model definition for nested cylinder -> scaled PTW value neural network
+
+        Args:
+            img_input_shape (tuple[int, int, int, int]): shape of image input (batchsize, channels, height, width)
+            NOutput (int): number of predictions; =1 for scaled PTW prediction
+            Nfilters (int): number of features
+            Ninterp (int): number of interpretability blocks
+            outputHiddenLayerSize (int): number of hidden features in dense layers
+            BNmomentum (float): momentum value for batch normalization layers
+            kernelSize (tuple[int, int]): size of kernels in the convolutional layers
+
+    """
     def __init__(self, 
                  img_input_shape: tuple[int, int, int, int],
                  NOutput: int=1, 
@@ -23,18 +35,7 @@ class NCylANN_V1(nn.Module):
                  outputHiddenLayerSize: int=20,
                  BNmomentum: float=0.99,
                  kernelSize: tuple[int, int]=(5,5)):
-        """ Model definition for nested cylinder -> scaled PTW value neural network
 
-            Args:
-                img_input_shape (tuple[int, int, int, int]): shape of image input (batchsize, channels, height, width)
-                NOutput (int): number of predictions; =1 for scaled PTW prediction
-                Nfilters (int): number of features
-                Ninterp (int): number of interpretability blocks
-                outputHiddenLayerSize (int): number of hidden features in dense layers
-                BNmomentum (float): momentum value for batch normalization layers
-                kernelSize (tuple[int, int]): size of kernels in the convolutional layers
-
-        """
         super(NCylANN_V1,self).__init__()
         self.img_input_shape = img_input_shape
         self.Nfilters = Nfilters
@@ -159,6 +160,14 @@ class NCylANN_V1(nn.Module):
         self.linOut = nn.Linear(outputHiddenLayerSize,NOutput)
         
     def forward(self,x):
+        """ Forward pass of pytorch neural network class
+
+            Args:
+                x (typing.Union[torch.FloatTensor, torch.cuda.FloatTensor]): input to layer
+
+            Returns:
+                x (torch.tensor[float]): prediction from model
+        """
         ## Input Layers
         x = self.inConv(x)
         x = self.inConvBatch(x)
