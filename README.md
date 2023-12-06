@@ -4,7 +4,9 @@
 
 This folder of code contains tools for extracting, plotting, and computing with features extracted from nerual networks. While these tools are intended to be easily maluable to new networks and new datasets, they are not guarenteed to work outside of these settings.
 
-These tools were developed by **Skylar Callis**. They developed this code while working as a post-bachelors student at [Los Alamos National Lab](https://www.lanl.gov/?source=globalheader) from 2022 - 2024. To see what they are up to these days, visit [Skylar's Website ](https://skylar-jean.com).
+These tools were developed by **Skylar Callis**. They developed this code while working as a post-bachelors student at [Los Alamos National Laboratory (LANL)](https://www.lanl.gov/?source=globalheader) from 2022 - 2024. To see what they are up to these days, visit [Skylar's Website ](https://skylar-jean.com).
+
+The feature interpertability code has been approved by LANL for a BSD-3 open source license under O#4675.
 
 To generate the most up-to-date documetaion, run the following commands in the `./docs/` directory:
 
