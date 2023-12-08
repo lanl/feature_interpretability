@@ -5,7 +5,7 @@ Defines the calico model for the single branch pytorch nested cylinder models
 Execution will print unit test information, perform unit tests, and print the results to the terminal.
 
 Input Line:
-``python pyt_nestedcyl_calico_model.py -M ../../../examples/pyt_nestedcyl/trained_hrMOICyl2sclPTW_model.pth -IF hr_MOICyl -IN ../../../examples/pyt_nestedcyl/data/ncyl_sclPTW_002_pvi_idx00130.npz -DF ../../../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interpActivations.14``
+``COMING SOON``
 """
 
 #############################
@@ -171,6 +171,8 @@ parser = calico_model_parser()
 ## Unit Tests for Calico Network
 #############################
 if __name__ == '__main__':
+
+	raise NotImplementedError('Nested cylinder examples not included in open source.')
 
 	## Parse Args
 	args = parser.parse_args()

@@ -5,7 +5,7 @@ Defines the pytorch dataset class for the single branch pytorch nested cylinder 
 Execution will print test information, perform tests, and print the results to the terminal.
 
 Input Line:
-``python pyt_nestedcyl_calico_dataloader.py -M ../../../examples/pyt_nestedcyl/trained_hrMOICyl2sclPTW_model.pth -IF hr_MOICyl -ID ../../../examples/pyt_nestedcyl/data/ -DF ../../../examples/pyt_nestedcyl/nestedcyl_design_file.csv``
+``COMING SOON``
 """
 
 #############################
@@ -151,6 +151,8 @@ parser = calico_dataloader_parser()
 #############################
 if __name__ == '__main__':
 
+	raise NotImplementedError('Nested cylinder examples not included in open source.')
+	
 	## Parse Args
 	args = parser.parse_args()
 
