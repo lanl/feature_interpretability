@@ -18,8 +18,7 @@ Input Line for Coupon Data:
 ``python field_sensitivity.py -E coupon -ID ../examples/tf_coupon/data/ -F All -S ../examples/tf_coupon/figures/``
 
 Input Line for Nested Cylinder Data:
-``python field_sensitivity.py -E nestedcylinder -ID ../examples/pyt_nestedcyl/data/ -F All -XK idx00130 -S ../examples/pyt_nestedcyl/figures/``
-
+``COMING SOON``
 """
 
 #############################

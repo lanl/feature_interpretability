@@ -11,7 +11,7 @@ Exports derivatives and other sample information as a pandas-readable .csv, incl
  - Truth PTW scaling corresponding to the input sample, and identifying sample information
 
 Input Line:
-``python ftderivatives_pyt_nestedcyl.py -M ../examples/pyt_nestedcyl/trained_hrMOICyl2sclPTW_model.pth -IF hr_MOICyl -ID ../examples/pyt_nestedcyl/data/ -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interpActivations.14 -T 1 -S ../examples/pyt_nestedcyl/figures/``
+``COMING SOON``
 """
 
 #############################

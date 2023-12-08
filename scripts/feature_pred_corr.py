@@ -27,7 +27,7 @@ Input Line for TF Coupon Models:
 ``python feature_pred_corr.py -P tensorflow -E coupon -M ../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -ID ../examples/tf_coupon/data/ -DF ../examples/tf_coupon/coupon_design_file.csv -L activation_15 -T All -NR 2 -S ../examples/tf_coupon/figures/``
 
 Input Line for PYT Nested Cylinder Models:
-``python feature_pred_corr.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_hrMOICyl2sclPTW_model.pth -IF hr_MOICyl -ID ../examples/pyt_nestedcyl/data/ -L interpActivations.14 -T All -NR 2 -S ../examples/pyt_nestedcyl/figures/``
+``COMING SOON``
 """
 
 #############################
