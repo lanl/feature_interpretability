@@ -85,6 +85,8 @@ parser = feature_derivatives_parser()
 #############################
 if __name__ == '__main__':
 
+	raise NotImplementedError('Nested cylinder examples not included in open source.')
+	
 	args = parser.parse_args()
 
 	## Model Imports

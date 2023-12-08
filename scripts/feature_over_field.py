@@ -157,6 +157,7 @@ if __name__ == '__main__':
         ZMinorTicks = False
 
     elif EXP == 'nestedcylinder':
+        raise NotImplementedError('Nested cylinder examples not included in open source.')
         ## Package Imports
         import fns.nestedcylinderdata as nc
         prefix = 'nc.'

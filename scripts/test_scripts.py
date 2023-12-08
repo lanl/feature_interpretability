@@ -84,6 +84,7 @@ if __name__ == '__main__':
     	NF = '../examples/tf_coupon/coupon_normalization.npz'
 
     elif EXP == 'nestedcylinder':
+        raise NotImplementedError('Nested cylinder examples not included in open source.')
     	IN = '../examples/pyt_nestedcyl/data/ncyl_sclPTW_327_pvi_idx00130.npz'
     	ID = '../examples/pyt_nestedcyl/data/'
     	DF = '../examples/pyt_nestedcyl/nestedcyl_design_file.csv'

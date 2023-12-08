@@ -112,6 +112,7 @@ if __name__ == '__main__':
         import fns.coupondata.prints as cpprints
         search_dir = input_dir+'r*tpl*idx*.npz'
     elif EXP == 'nestedcylinder':
+        raise NotImplementedError('Nested cylinder examples not included in open source.')
         import fns.nestedcylinderdata as nc
         prefix = 'nc.'
         import fns.nestedcylinderdata.prints as ncprints
