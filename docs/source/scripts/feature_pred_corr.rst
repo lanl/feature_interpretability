@@ -18,10 +18,10 @@ Feature - Prediction Correlation
 
   |
 
-  .. image:: ./figures/pyt_nestedcyl/ft_pred_corr__statsig.png
+  .. image:: ./figures/pyt_nestedcyl/COMING_SOON.png
    :alt: Statistically Significnat Correlations of L2 Norm of Nested Cylinder Features and Network Predictions
    :align: center
-   :scale: 40%
+   :scale: 100%
 
   .. centered:: *Statistically Significnat Correlations of L2 Norm of Nested Cylinder Features and Network Predictions*
 

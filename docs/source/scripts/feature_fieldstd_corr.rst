@@ -18,9 +18,10 @@ Feature - Field Standard Deviation Correlation
 
   |
 
-  .. image:: ./figures/pyt_nestedcyl/featurefieldstdcorr.png
+  .. image:: ./figures/pyt_nestedcyl/COMING_SOON.png
    :alt: Correlation of Standard Deviation of Nested Cylinder Fields and Extracted Nested Cylinder Features
    :align: center
+   :scale: 100%
 
   .. centered:: *Correlation of Standard Deviation of Nested Cylinder Fields and Extracted Nested Cylinder Features*
 

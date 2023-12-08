@@ -18,10 +18,10 @@ Plot Features Over Fields
 
   |
 
-  .. image:: ./figures/pyt_nestedcyl/interpActivations14_features_over_fields.png
+  .. image:: ./figures/pyt_nestedcyl/COMING_SOON.png
    :alt: Features Extracted from the Pytorch Nested Cylinder Network Plotted Over Fields
    :align: center
-   :scale: 30%
+   :scale: 100%
 
   .. centered:: *Features Extracted from the Pytorch Nested Cylinder Network Plotted Over Fields*
 

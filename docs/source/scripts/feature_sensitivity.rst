@@ -18,10 +18,10 @@ Feature Sensitivity
 
   |
 
-  .. image:: ./figures/pyt_nestedcyl/interpActivations14_feature12_std_idx00130.png
+  .. image:: ./figures/pyt_nestedcyl/COMING_SOON.png
    :alt: Standard Deviation of Features Extracted from the Pytorch Nested Cylinder Network on idx001300 Data
    :align: center
-   :scale: 80%
+   :scale: 100%
 
   .. centered:: *Standard Deviation of Feature 12 Extracted from the Pytorch Nested Cylinder Network on idx001300 Data*
 

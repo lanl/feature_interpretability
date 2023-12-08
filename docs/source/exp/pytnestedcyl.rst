@@ -4,6 +4,10 @@ Pytorch Nested Cylinder Models
 
 Straightfoward CNNs were developed in pytorch to estimate the scaling of a Preston-Tonks-Wallace (PTW) strength model from a nested cylinder experiment.
 
+.. attention::
+   
+   Nested cylinder examples are not currently included in the open source edition of this code. As such, when a script is passed ``--EXPERIMENT nestedcylinder``, it raises a ``NotImplementedError``. Nested cylinder examples are expected to be added in February 2024.
+
 .. contents:: Table of Contents:
   :local:
   :depth: 2 
@@ -13,7 +17,7 @@ Model Inputs & Outputs
 
 Networks trained on nested cylinder data take as input an image showing the density of the Material Of Interest (MOI) in the nested cylinder experiment. An example MOI density is shown below.
 
- .. image:: nestedcyl_MOI_input.png
+ .. image:: COMING_SOON.png
    :scale: 100 %
    :alt: nested cylinder experiment density of material of interest
    :align: center

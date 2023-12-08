@@ -17,9 +17,10 @@ Field Autocorrelation
 
   |
 
-  .. image:: ./figures/pyt_nestedcyl/field_autocorr.png
+  .. image:: ./figures/pyt_nestedcyl/COMING_SOON.png
    :alt: Autocorrelation of Nested Cylinder Hydrodynamic Fields
    :align: center
+   :scale: 100%
 
   .. centered:: *Autocorrelation of Nested Cylinder Hydrodynamic Fields*
 

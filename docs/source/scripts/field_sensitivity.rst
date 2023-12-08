@@ -18,10 +18,10 @@ Field Sensitivity
 
   |
 
-  .. image:: ./figures/pyt_nestedcyl/hr_MOICyl_std_idx00130.png
+  .. image:: ./figures/pyt_nestedcyl/COMING_SOON.png
    :alt: Standard Deviation of Nested Cylinder hr_MOICyl Field on idx001100 Data
    :align: center
-   :scale: 80%
+   :scale: 100%
 
   .. centered:: *Standard Deviation of Nested Cylinder hr_MOICyl Field on idx001100 Data*
 

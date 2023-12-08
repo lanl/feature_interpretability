@@ -15,6 +15,10 @@ All scripts take a ``--PACKAGE`` argument that specifies if the model was built 
 
 All scripts also take an ``--EXPERIMENT`` argument that specifies what dataset the model was trained on. This data process has been established for two experients at LANL: the ``coupon`` experiment and the ``nestedcylinder`` experiment. If the user wants to analyze networks trained on other datasets, they would first have to develop a submodule to process date from that experiment, and then integrate that code into existing scripts.
 
+.. attention::
+   
+   Nested cylinder examples are not currently included in the open source edition of this code. As such, when a script is passed ``--EXPERIMENT nestedcylinder``, it raises a ``NotImplementedError``. Nested cylinder examples are expected to be added in February 2024.
+
 While these tools are intended to be easily maluable to new networks and new datasets, they are not guarenteed to work outside of the tested use cases.
 
 Network Nomenclature
