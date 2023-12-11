@@ -6,6 +6,7 @@ Input Line for Tensorflow Models on Coupon Data:
 ``python test_scripts.py -P tensorflow -E coupon``
 
 Input Line for PYT Nested Cylinder Models:
+CURRENTLY DEPRECATED
 ``python test_scripts.py -P pytorch -E nestedcylinder``
 """
 
