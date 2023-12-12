@@ -2,7 +2,10 @@
 Feature Interpretability Documentation
 ############################################
 
-This folder of code contains tools for extracting, plotting, and computing with features extracted from nerual networks. 
+This code contains tools for neural network interpretability by examining internal model states (features) in both Python TensorFlow and PyTorch. These tools were utilized on two LANL machine learning problems, detailed in the `documentation <https://lanl.github.io/feature_interpretability/html/index.html>`_ and in the ``examples`` directory.
+
+More details about the use of *feature interpretability* on the LANL coupon problem can be found in:
+   Hickmann, K, Callis, S, & Andrews, S. "Training and Interpretability of Deep-Neural Methods for Damage Calibration in Copper." Proceedings of the ASME 2023 Verification, Validation, and Uncertainty Quantification Symposium. ASME 2023 Verification, Validation, and Uncertainty Quantification Symposium. Baltimore, Maryland, USA. May 17–19, 2023. V001T04A001. ASME. `<https://doi.org/10.1115/VVUQ2023-108759>`_
 
 These tools were developed by **Skylar Callis**. They developed this code while working as a post-bachelors student at `Los Alamos National Lab <https://www.lanl.gov/?source=globalheader>`_ from 2022 - 2024. To see what they are up to these days, visit `Skylar's Website <https://skylar-jean.com>`_.
 
