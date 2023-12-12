@@ -2,7 +2,6 @@
 __pycache__/
 **/.DS_Store
 **/__pycache__/
-docs/build/*
 .coverage
 temp_figures/*
 !temp_figures/README.md
