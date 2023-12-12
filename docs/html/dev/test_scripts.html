@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Scripts Script &mdash; Feature Interpretability 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Documentation" href="docs.html" />
+    <link rel="prev" title="Testing with Pytest" href="testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Feature Interpretability
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tested Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exp/tfcoupon.html">Tensorflow Coupon Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exp/pytnestedcyl.html">Pytorch Nested Cylinder Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/plot_features.html">Plot Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_over_fields.html">Plot Features Over Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_sensitivity.html">Feature Sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/field_sensitivity.html">Field Sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/field_autocorr.html">Field Autocorrelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_field_corr.html">Feature - Field Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_fieldstd_corr.html">Feature - Field Standard Deviation Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_pred_corr.html">Feature - Prediction Correlation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Feature Derivatives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives/landing.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives/tfcoupon.html">Derivatives on Tensorflow Coupon Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives/pytnestedcyl.html">Derivatives on Pytorch Nested Cylinder Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Helper Functions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fns/outer.html">Outer Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fns/setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fns/coupondata.html">Coupon Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fns/nestedcylinderdata.html">Nested Cylinder Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fns/tfcustom.html">Tensorflow Custom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fns/pytorchcustom.html">Pytorch Custom</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Tools</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="enviroments.html">Enviroments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing with Pytest</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><em>Test Scripts</em> Script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-test_scripts">Code Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arguments">Arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#named-arguments">Named Arguments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Feature Interpretability</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><em>Test Scripts</em> Script</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/dev/test_scripts.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="test-scripts-script">
+<h1><em>Test Scripts</em> Script<a class="headerlink" href="#test-scripts-script" title="Permalink to this headline"></a></h1>
+<p>The <em>test scripts</em> script runs all of the other scripts, including the feature derivative scripts, to check for bugs. This is not a full coverage test, and should not be taken as such. Instead, it is intended to catch simple bugs introduced in the fns module. It can also be used to check that the python enviroment has all of the required packages to run the feature interpretability module.</p>
+<p>This does not save any individual script output. It does print the time it took to run to the command line.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Nested cylinder examples are not currently included in the open source edition of this code. As such, when a script is passed <code class="docutils literal notranslate"><span class="pre">--EXPERIMENT</span> <span class="pre">nestedcylinder</span></code>, it raises a <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code>. Nested cylinder examples are expected to be added in February 2024.</p>
+</div>
+<section id="module-test_scripts">
+<span id="code-documentation"></span><h2>Code Documentation<a class="headerlink" href="#module-test_scripts" title="Permalink to this headline"></a></h2>
+<p>Runs all scripts to test for errors. Does not save script output.</p>
+<p>Input Line for Tensorflow Models on Coupon Data:
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">test_scripts.py</span> <span class="pre">-P</span> <span class="pre">tensorflow</span> <span class="pre">-E</span> <span class="pre">coupon</span></code></p>
+<p>Input Line for PYT Nested Cylinder Models:
+CURRENTLY DEPRECATED
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">test_scripts.py</span> <span class="pre">-P</span> <span class="pre">pytorch</span> <span class="pre">-E</span> <span class="pre">nestedcylinder</span></code></p>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<p><p>Runs all feature interpretability scripts to test for errors.</p>
+</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">python</span> <span class="n">test_scripts</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PACKAGE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">EXPERIMENT</span><span class="p">]</span>
+</pre></div>
+</div>
+<section id="named-arguments">
+<h3>Named Arguments<a class="headerlink" href="#named-arguments" title="Permalink to this headline"></a></h3>
+<dl class="option-list">
+<dt><kbd>--PACKAGE, -P</kbd></dt>
+<dd><p>Possible choices: tensorflow, pytorch</p>
+<p>Which python package was used to create the model</p>
+<p>Default: “tensorflow”</p>
+</dd>
+<dt><kbd>--EXPERIMENT, -E</kbd></dt>
+<dd><p>Possible choices: coupon, nestedcylinder</p>
+<p>Which experiment the model was trained on</p>
+<p>Default: “coupon”</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="testing.html" class="btn btn-neutral float-left" title="Testing with Pytest" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="docs.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Skylar Callis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
