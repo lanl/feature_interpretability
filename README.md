@@ -8,12 +8,6 @@ These tools were developed by **Skylar Callis**. They developed this code while 
 
 The feature interpertability code has been approved by LANL for a BSD-3 open source license under O#4675.
 
-To generate the most up-to-date documetaion, run the following commands in the `./docs/` directory:
+The documentation for this code can be found [locally](./docs/html/index.html) and [hosted on GitHub](https://lanl.github.io/feature_interpretability/html/index.html).
 
- - `make clean` to remove existing build docs
- - `make html` to create the new docs
- - open `./docs/build/html/index.html` to view rendered docs
-
-The documentation for this code can be found [locally](./docs/build/html/index.html) and at [url coming soon]().
-
-The github page for this code can be found at [url coming soon]().
+The GitHub page for this code can be found at [here](https://github.com/lanl/feature_interpretability).
