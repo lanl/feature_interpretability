@@ -1,9 +1,12 @@
 [tool.poetry]
-name = "feature-interpretability"
+name = "feature_interpretability"
 version = "0.1.0"
-description = "Contains scripts & tools for extracting, plotting, and computing with features extracted from neural networks."
+license = "BSD-3-Clause"
+description = "Tools for neural network interpretability by examining internal model states (features) in both Python TensorFlow and PyTorch"
 authors = ["Skylar Callis <sjcallis@lanl.gov>"]
 readme = "README.md"
+repository = "https://github.com/lanl/feature_interpretability"
+documentation = "https://lanl.github.io/feature_interpretability/html/index.html"
 packages = [
 	{include = "scripts"},
 	{include = "fns", from = "src"},
