@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tensorflow Custom &mdash; Feature Interpretability 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pytorch Custom" href="pytorchcustom.html" />
+    <link rel="prev" title="Nested Cylinder Data" href="nestedcylinderdata.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Feature Interpretability
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tested Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exp/tfcoupon.html">Tensorflow Coupon Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exp/pytnestedcyl.html">Pytorch Nested Cylinder Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/plot_features.html">Plot Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_over_fields.html">Plot Features Over Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_sensitivity.html">Feature Sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/field_sensitivity.html">Field Sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/field_autocorr.html">Field Autocorrelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_field_corr.html">Feature - Field Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_fieldstd_corr.html">Feature - Field Standard Deviation Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_pred_corr.html">Feature - Prediction Correlation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Feature Derivatives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives/landing.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives/tfcoupon.html">Derivatives on Tensorflow Coupon Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives/pytnestedcyl.html">Derivatives on Pytorch Nested Cylinder Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Helper Functions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="outer.html">Outer Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coupondata.html">Coupon Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nestedcylinderdata.html">Nested Cylinder Data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tensorflow Custom</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-fns.tfcustom.fts">Feature Processing (tfcustom.fts)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fns.tfcustom.prints">Model Prints (tfcustom.prints)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fns.tfcustom.checks">Model Checks (tfcustom.checks)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fns.tfcustom.calico">Calico Functions (tfcustom.calico)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pytorchcustom.html">Pytorch Custom</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/enviroments.html">Enviroments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/testing.html">Testing with Pytest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/test_scripts.html"><em>Test Scripts</em> Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/docs.html">Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Feature Interpretability</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tensorflow Custom</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/fns/tfcustom.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tensorflow-custom">
+<h1>Tensorflow Custom<a class="headerlink" href="#tensorflow-custom" title="Permalink to this headline"></a></h1>
+<p>The tensorflow custom (tfcustom) module contains functions that process models created with the tensorflow package.</p>
+<div class="contents local topic" id="table-of-contents">
+<p class="topic-title">Table of Contents:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#module-fns.tfcustom.fts" id="id1">Feature Processing (tfcustom.fts)</a></p></li>
+<li><p><a class="reference internal" href="#module-fns.tfcustom.prints" id="id2">Model Prints (tfcustom.prints)</a></p></li>
+<li><p><a class="reference internal" href="#module-fns.tfcustom.checks" id="id3">Model Checks (tfcustom.checks)</a></p></li>
+<li><p><a class="reference internal" href="#module-fns.tfcustom.calico" id="id4">Calico Functions (tfcustom.calico)</a></p></li>
+</ul>
+</div>
+<section id="module-fns.tfcustom.fts">
+<span id="feature-processing-tfcustom-fts"></span><h2><a class="toc-backref" href="#id1">Feature Processing (tfcustom.fts)</a><a class="headerlink" href="#module-fns.tfcustom.fts" title="Permalink to this headline"></a></h2>
+<p>Contains functions to extract features from a tensorflow neural network</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.tfcustom.fts.feature_extractor">
+<span class="sig-prename descclassname"><span class="pre">fns.tfcustom.fts.</span></span><span class="sig-name descname"><span class="pre">feature_extractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.tfcustom.fts.feature_extractor" title="Permalink to this definition"></a></dt>
+<dd><p>Function to extract the features from a given layer of a model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>loaded keras model</em>) – </p></li>
+<li><p><strong>lay</strong> (<em>str</em>) – name of a layer in model</p></li>
+<li><p><strong>model_in</strong> (<em>varies</em>) – correctly formatted model input</p></li>
+<li><p><strong>norm</strong> (<em>str</em>) – {‘ft01’, ‘all01’, ‘none’}
+a string to indicate which normalization methodology to use;</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ft_mat</strong> (<em>np.ndarray[(any, any, any), float]</em>) – an array of all features extracted from a given layer;
+the first two dimensions are the size of the feature;
+the last dimension is the number of features in a layer</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="outer.html#fns.mat.normalize_mat" title="fns.mat.normalize_mat"><code class="xref py py-func docutils literal notranslate"><span class="pre">fns.mat.normalize_mat()</span></code></a> for information about choices for <em>norm</em></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.tfcustom.fts.parse_features">
+<span class="sig-prename descclassname"><span class="pre">fns.tfcustom.fts.</span></span><span class="sig-name descname"><span class="pre">parse_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.tfcustom.fts.parse_features" title="Permalink to this definition"></a></dt>
+<dd><p>Function to make a list of the features to plot</p>
+<blockquote>
+<div><p>Prints error message and exits program for features = [‘Grid’]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>loaded keras model</em>) – </p></li>
+<li><p><strong>lay</strong> (<em>str</em>) – name of a layer in model
+features (list[str]): list of features to plot, starting at feature 1</p></li>
+<li><p><strong>features</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>n_features</strong> (<em>int</em>) – how may features to plot</p></li>
+<li><p><strong>features</strong> (<em>list[int]</em>) – list of features to plot, starting at feature 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-fns.tfcustom.prints">
+<span id="model-prints-tfcustom-prints"></span><h2><a class="toc-backref" href="#id2">Model Prints (tfcustom.prints)</a><a class="headerlink" href="#module-fns.tfcustom.prints" title="Permalink to this headline"></a></h2>
+<p>Contains functions to print out lists of options for model-related input arguments</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.tfcustom.prints.print_layers">
+<span class="sig-prename descclassname"><span class="pre">fns.tfcustom.prints.</span></span><span class="sig-name descname"><span class="pre">print_layers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.tfcustom.prints.print_layers" title="Permalink to this definition"></a></dt>
+<dd><p>Function that prints a list of layer names in a model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>loaded keras model</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.tfcustom.prints.print_features">
+<span class="sig-prename descclassname"><span class="pre">fns.tfcustom.prints.</span></span><span class="sig-name descname"><span class="pre">print_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lay</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.tfcustom.prints.print_features" title="Permalink to this definition"></a></dt>
+<dd><p>Function that prints how many features are extracted from a layer of a model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>loaded keras model</em>) – </p></li>
+<li><p><strong>lay</strong> (<em>str</em>) – name of layer to get features from</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-fns.tfcustom.checks">
+<span id="model-checks-tfcustom-checks"></span><h2><a class="toc-backref" href="#id3">Model Checks (tfcustom.checks)</a><a class="headerlink" href="#module-fns.tfcustom.checks" title="Permalink to this headline"></a></h2>
+<p>Contains functions to check that the model-related input arguments passed are valid</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.tfcustom.checks.check_layer">
+<span class="sig-prename descclassname"><span class="pre">fns.tfcustom.checks.</span></span><span class="sig-name descname"><span class="pre">check_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lay</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.tfcustom.checks.check_layer" title="Permalink to this definition"></a></dt>
+<dd><p>Function that checks if a layer name is in the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>loaded keras model</em>) – </p></li>
+<li><p><strong>lay</strong> (<em>str</em>) – name of layer to test</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.tfcustom.checks.check_features">
+<span class="sig-prename descclassname"><span class="pre">fns.tfcustom.checks.</span></span><span class="sig-name descname"><span class="pre">check_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.tfcustom.checks.check_features" title="Permalink to this definition"></a></dt>
+<dd><p>Function that checks if number of features requested are available from a layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>loaded keras model</em>) – </p></li>
+<li><p><strong>lay</strong> (<em>str</em>) – name of layer where features will be extracted from</p></li>
+<li><p><strong>features</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – should be [‘Grid’], [‘All’], or a list of integers;
+features the script plans on extracting</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-fns.tfcustom.calico">
+<span id="calico-functions-tfcustom-calico"></span><h2><a class="toc-backref" href="#id4">Calico Functions (tfcustom.calico)</a><a class="headerlink" href="#module-fns.tfcustom.calico" title="Permalink to this headline"></a></h2>
+<p>Contains functions to create a calico network and do prints/checks on the calcio network inputs</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.tfcustom.calico.check_calico_layer">
+<span class="sig-prename descclassname"><span class="pre">fns.tfcustom.calico.</span></span><span class="sig-name descname"><span class="pre">check_calico_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'None'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">catlay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'None'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.tfcustom.calico.check_calico_layer" title="Permalink to this definition"></a></dt>
+<dd><p>Function that checks if the layer is a valid selection for the split layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>loaded keras model</em>) – </p></li>
+<li><p><strong>lay</strong> (<em>str</em>) – name of layer to test</p></li>
+<li><p><strong>branch</strong> (<em>str</em>) – key used to identify which layers are on the secondary branch;
+use ‘None’ if the model only has one branch</p></li>
+<li><p><strong>catlay</strong> (<em>str</em>) – name of layer where the branches of the model are concatenated
+use ‘None’ if the model only has one branch</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.tfcustom.calico.check_calico_features">
+<span class="sig-prename descclassname"><span class="pre">fns.tfcustom.calico.</span></span><span class="sig-name descname"><span class="pre">check_calico_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.tfcustom.calico.check_calico_features" title="Permalink to this definition"></a></dt>
+<dd><p>Function that checks if number of features requested are available from a layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>loaded keras model</em>) – </p></li>
+<li><p><strong>lay</strong> (<em>str</em>) – name of layer where features will be extracted from</p></li>
+<li><p><strong>features</strong> (<em>str</em>) – an integer; features the calico model scales</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.tfcustom.calico.layer_copy">
+<span class="sig-prename descclassname"><span class="pre">fns.tfcustom.calico.</span></span><span class="sig-name descname"><span class="pre">layer_copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cnnlayer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.tfcustom.calico.layer_copy" title="Permalink to this definition"></a></dt>
+<dd><p>Function to create a copy of a keras layer object</p>
+<p>Based on the layer type and configuration</p>
+<p>Does NOT copy trained layer weights</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cnnlayer</strong> (<em>keras.layers</em>) – layer to make a copy of</p></li>
+<li><p><strong>tag</strong> (<em>str</em>) – string “tag” to be appended to the name of the copied layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cnnlayer2</strong> (<em>keras.layer</em>) – copy of cnnlayer with same type and configuration</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nestedcylinderdata.html" class="btn btn-neutral float-left" title="Nested Cylinder Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pytorchcustom.html" class="btn btn-neutral float-right" title="Pytorch Custom" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Skylar Callis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

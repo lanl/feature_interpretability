@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup &mdash; Feature Interpretability 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Coupon Data" href="coupondata.html" />
+    <link rel="prev" title="Outer Functions" href="outer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Feature Interpretability
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tested Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exp/tfcoupon.html">Tensorflow Coupon Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exp/pytnestedcyl.html">Pytorch Nested Cylinder Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/plot_features.html">Plot Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_over_fields.html">Plot Features Over Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_sensitivity.html">Feature Sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/field_sensitivity.html">Field Sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/field_autocorr.html">Field Autocorrelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_field_corr.html">Feature - Field Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_fieldstd_corr.html">Feature - Field Standard Deviation Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/feature_pred_corr.html">Feature - Prediction Correlation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Feature Derivatives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives/landing.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives/tfcoupon.html">Derivatives on Tensorflow Coupon Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives/pytnestedcyl.html">Derivatives on Pytorch Nested Cylinder Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Helper Functions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="outer.html">Outer Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-fns.setup.args">Argument Parser (setup.args)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fns.setup.data_prints">Data Prints (setup.data_prints)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fns.setup.data_checks">Data Checks (setup.data_checks)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coupondata.html">Coupon Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nestedcylinderdata.html">Nested Cylinder Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tfcustom.html">Tensorflow Custom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorchcustom.html">Pytorch Custom</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/enviroments.html">Enviroments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/testing.html">Testing with Pytest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/test_scripts.html"><em>Test Scripts</em> Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/docs.html">Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Feature Interpretability</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setup</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/fns/setup.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline"></a></h1>
+<p>The setup module contains functions that setup arguments for the main modules.</p>
+<div class="contents local topic" id="table-of-contents">
+<p class="topic-title">Table of Contents:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#module-fns.setup.args" id="id1">Argument Parser (setup.args)</a></p></li>
+<li><p><a class="reference internal" href="#module-fns.setup.data_prints" id="id2">Data Prints (setup.data_prints)</a></p></li>
+<li><p><a class="reference internal" href="#module-fns.setup.data_checks" id="id3">Data Checks (setup.data_checks)</a></p></li>
+</ul>
+</div>
+<section id="module-fns.setup.args">
+<span id="argument-parser-setup-args"></span><h2><a class="toc-backref" href="#id1">Argument Parser (setup.args)</a><a class="headerlink" href="#module-fns.setup.args" title="Permalink to this headline"></a></h2>
+<p>Contains functions for creating a consistent set of argparse arguments for the entire couponmlactivation suite.</p>
+<p>Default file paths execute the example code for the tensorflow coupon models</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.setup.args.argument">
+<span class="sig-prename descclassname"><span class="pre">fns.setup.args.</span></span><span class="sig-name descname"><span class="pre">argument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dft</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.setup.args.argument" title="Permalink to this definition"></a></dt>
+<dd><p>Example function to create the argument “–ARGUMENT”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parser</strong> (<em>argparse.ArgumentParser</em>) – pre-existing parser</p></li>
+<li><p><strong>dft</strong> (<em>type varies</em><em>, </em><em>optional</em>) – default value, should be same type as the argument being defined</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<details class="summary-show-all-arguments">
+<summary>Show All Arguments</summary><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">module</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PACKAGE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">EXPERIMENT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">MODEL</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">--</span><span class="n">INPUT_FIELD</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">INPUT_NPZ</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">INPUT_DIR</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">--</span><span class="n">FILE_LIST</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">DESIGN_FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">NORM_FILE</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">--</span><span class="n">PRINT_LAYERS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_FEATURES</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_FIELDS</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">--</span><span class="n">PRINT_KEYS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_SAMPLES</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">LAYER</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">--</span><span class="n">FEATURES</span>  <span class="p">[</span><span class="o">...</span><span class="p">]]</span> <span class="p">[</span><span class="o">--</span><span class="n">D_SCALE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">MAT_NORM</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">--</span><span class="n">SCLR_NORM</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">FIELDS</span>  <span class="p">[</span><span class="o">...</span><span class="p">]]</span> <span class="p">[</span><span class="o">--</span><span class="n">FIXED_KEY</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">--</span><span class="n">NUM_SAMPLES</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">ALPHA1</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">ALPHA2</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">COLOR1</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">--</span><span class="n">COLOR2</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">SAVE_FIG</span><span class="p">]</span>
+</pre></div>
+</div>
+<section id="named-arguments">
+<h3>Named Arguments<a class="headerlink" href="#named-arguments" title="Permalink to this headline"></a></h3>
+<dl class="option-list">
+<dt><kbd>--PACKAGE, -P</kbd></dt>
+<dd><p>Possible choices: tensorflow, pytorch</p>
+<p>Which python package was used to create the model</p>
+<p>Default: “tensorflow”</p>
+</dd>
+<dt><kbd>--EXPERIMENT, -E</kbd></dt>
+<dd><p>Possible choices: coupon, nestedcylinder</p>
+<p>Which experiment the model was trained on</p>
+<p>Default: “coupon”</p>
+</dd>
+<dt><kbd>--MODEL, -M</kbd></dt>
+<dd><p>Model file</p>
+<p>Default: “../examples/tf_coupon/trained_pRad2TePla_model.h5”</p>
+</dd>
+<dt><kbd>--INPUT_FIELD, -IF</kbd></dt>
+<dd><p>The radiographic/hydrodynamic field the model is trained on</p>
+<p>Default: “pRad”</p>
+</dd>
+<dt><kbd>--INPUT_NPZ, -IN</kbd></dt>
+<dd><p>The .npz file with an input image to the model</p>
+<p>Default: “../examples/tf_coupon/data/r60um_tpl112_complete_idx00110.npz”</p>
+</dd>
+<dt><kbd>--INPUT_DIR, -ID</kbd></dt>
+<dd><p>Directory path where all of the .npz files are stored</p>
+<p>Default: “../examples/tf_coupon/data/”</p>
+</dd>
+<dt><kbd>--FILE_LIST, -FL</kbd></dt>
+<dd><p>The .txt file containing a list of .npz file paths; use “MAKE” to generate a file list given an input directory (passed with -ID) and a number of samples (passed with -NS).</p>
+<p>Default: “MAKE”</p>
+</dd>
+<dt><kbd>--DESIGN_FILE, -DF</kbd></dt>
+<dd><p>The .csv file with master design study parameters</p>
+<p>Default: “../examples/tf_coupon/coupon_design_file.csv”</p>
+</dd>
+<dt><kbd>--NORM_FILE, -NF</kbd></dt>
+<dd><p>The .npz file normalization values</p>
+<p>Default: “../examples/tf_coupon/coupon_normalization.npz”</p>
+</dd>
+<dt><kbd>--PRINT_LAYERS, -PL</kbd></dt>
+<dd><p>Prints list of layer names in a model (passed with -M) and quits program</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--PRINT_FEATURES, -PT</kbd></dt>
+<dd><p>Prints number of features extracted by a layer (passed with -L) and quits program</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--PRINT_FIELDS, -PF</kbd></dt>
+<dd><p>Prints list of hydrodynamic/radiographic fields present in a given .npz file (passed with -IN) and quits program</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--PRINT_KEYS, -PK</kbd></dt>
+<dd><p>Prints list of choices for the fixed key avialable in a given input dirrectory (passed with -ID) and quits program</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--PRINT_SAMPLES, -PS</kbd></dt>
+<dd><p>Prints number of samples in a directory (passed with -ID) matching a fixed key (passed with -XK) and quits program</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--LAYER, -L</kbd></dt>
+<dd><p>Name of model layer that features will be extracted from</p>
+<p>Default: “None”</p>
+</dd>
+<dt><kbd>--FEATURES, -T</kbd></dt>
+<dd><p>List of features to include; “Grid” plots all features in one figure using subplots; “All” plots all features each in a new figure; A list of integers can be passed to plot those features each in a new figure. Integer convention starts at 1.</p>
+<p>Default: [‘Grid’]</p>
+</dd>
+<dt><kbd>--D_SCALE, -DS</kbd></dt>
+<dd><p>Scaling factor used in feature derivatives.</p>
+<p>Default: 0.001</p>
+</dd>
+<dt><kbd>--MAT_NORM, -NM</kbd></dt>
+<dd><p>Possible choices: ft01, all01, none</p>
+<p>How the extracted features will be normalized, resulting in a scaled matrix; “ft01” normalizes by the min and max of each feature separately; “all01” normalizes by the min and max of all extracted features; “none” does not normalize features.</p>
+<p>Default: “ft01”</p>
+</dd>
+<dt><kbd>--SCLR_NORM, -NR</kbd></dt>
+<dd><p>Possible choices: fro, nuc, inf, -inf, 0, 1, -1, 2, -2</p>
+<p>How the extracted features will be normalized, resulting in a scalar value; for choices, see numpy.linalg.norm documentation.</p>
+<p>Default: “2”</p>
+</dd>
+<dt><kbd>--FIELDS, -F</kbd></dt>
+<dd><p>List of fields to be included; pass “none” to use an all-zero field; pass “All” to use all valid fields.</p>
+<p>Default: [‘rho’, ‘eqps’, ‘eqps_rate’, ‘eff_stress’, ‘porosity’]</p>
+</dd>
+<dt><kbd>--FIXED_KEY, -XK</kbd></dt>
+<dd><p>The identifying string for some subset of all data samples; pass “None” to consider all samples</p>
+<p>Default: “None”</p>
+</dd>
+<dt><kbd>--NUM_SAMPLES, -NS</kbd></dt>
+<dd><p>Number of samples to use; pass “All” to use all samples in a given input dirrectory (passed with -ID)</p>
+<p>Default: “All”</p>
+</dd>
+<dt><kbd>--ALPHA1, -A1</kbd></dt>
+<dd><p>Opacity of colormap at value 0</p>
+<p>Default: 0.25</p>
+</dd>
+<dt><kbd>--ALPHA2, -A2</kbd></dt>
+<dd><p>Opacity of colormap at value 1</p>
+<p>Default: 1.0</p>
+</dd>
+<dt><kbd>--COLOR1, -C1</kbd></dt>
+<dd><p>Possible choices: aliceblue, antiquewhite, aqua, aquamarine, azure, beige, bisque, black, blanchedalmond, blue, blueviolet, brown, burlywood, cadetblue, chartreuse, chocolate, coral, cornflowerblue, cornsilk, crimson, cyan, darkblue, darkcyan, darkgoldenrod, darkgray, darkgreen, darkgrey, darkkhaki, darkmagenta, darkolivegreen, darkorange, darkorchid, darkred, darksalmon, darkseagreen, darkslateblue, darkslategray, darkslategrey, darkturquoise, darkviolet, deeppink, deepskyblue, dimgray, dimgrey, dodgerblue, firebrick, floralwhite, forestgreen, fuchsia, gainsboro, ghostwhite, gold, goldenrod, gray, green, greenyellow, grey, honeydew, hotpink, indianred, indigo, ivory, khaki, lavender, lavenderblush, lawngreen, lemonchiffon, lightblue, lightcoral, lightcyan, lightgoldenrodyellow, lightgray, lightgreen, lightgrey, lightpink, lightsalmon, lightseagreen, lightskyblue, lightslategray, lightslategrey, lightsteelblue, lightyellow, lime, limegreen, linen, magenta, maroon, mediumaquamarine, mediumblue, mediumorchid, mediumpurple, mediumseagreen, mediumslateblue, mediumspringgreen, mediumturquoise, mediumvioletred, midnightblue, mintcream, mistyrose, moccasin, navajowhite, navy, oldlace, olive, olivedrab, orange, orangered, orchid, palegoldenrod, palegreen, paleturquoise, palevioletred, papayawhip, peachpuff, peru, pink, plum, powderblue, purple, rebeccapurple, red, rosybrown, royalblue, saddlebrown, salmon, sandybrown, seagreen, seashell, sienna, silver, skyblue, slateblue, slategray, slategrey, snow, springgreen, steelblue, tan, teal, thistle, tomato, turquoise, violet, wheat, white, whitesmoke, yellow, yellowgreen</p>
+<p>Color of colormap at value 0; Choose from matplotlib CSS4 color list.</p>
+<p>Default: “yellow”</p>
+</dd>
+<dt><kbd>--COLOR2, -C2</kbd></dt>
+<dd><p>Possible choices: aliceblue, antiquewhite, aqua, aquamarine, azure, beige, bisque, black, blanchedalmond, blue, blueviolet, brown, burlywood, cadetblue, chartreuse, chocolate, coral, cornflowerblue, cornsilk, crimson, cyan, darkblue, darkcyan, darkgoldenrod, darkgray, darkgreen, darkgrey, darkkhaki, darkmagenta, darkolivegreen, darkorange, darkorchid, darkred, darksalmon, darkseagreen, darkslateblue, darkslategray, darkslategrey, darkturquoise, darkviolet, deeppink, deepskyblue, dimgray, dimgrey, dodgerblue, firebrick, floralwhite, forestgreen, fuchsia, gainsboro, ghostwhite, gold, goldenrod, gray, green, greenyellow, grey, honeydew, hotpink, indianred, indigo, ivory, khaki, lavender, lavenderblush, lawngreen, lemonchiffon, lightblue, lightcoral, lightcyan, lightgoldenrodyellow, lightgray, lightgreen, lightgrey, lightpink, lightsalmon, lightseagreen, lightskyblue, lightslategray, lightslategrey, lightsteelblue, lightyellow, lime, limegreen, linen, magenta, maroon, mediumaquamarine, mediumblue, mediumorchid, mediumpurple, mediumseagreen, mediumslateblue, mediumspringgreen, mediumturquoise, mediumvioletred, midnightblue, mintcream, mistyrose, moccasin, navajowhite, navy, oldlace, olive, olivedrab, orange, orangered, orchid, palegoldenrod, palegreen, paleturquoise, palevioletred, papayawhip, peachpuff, peru, pink, plum, powderblue, purple, rebeccapurple, red, rosybrown, royalblue, saddlebrown, salmon, sandybrown, seagreen, seashell, sienna, silver, skyblue, slateblue, slategray, slategrey, snow, springgreen, steelblue, tan, teal, thistle, tomato, turquoise, violet, wheat, white, whitesmoke, yellow, yellowgreen</p>
+<p>Color of colormap at value 1; Choose from matplotlib CSS4 color list.</p>
+<p>Default: “red”</p>
+</dd>
+<dt><kbd>--SAVE_FIG, -S</kbd></dt>
+<dd><p>Directory to save the outputs to.</p>
+<p>Default: “../examples/tf_coupon/figures/”</p>
+</dd>
+</dl>
+</section>
+</details><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="module-fns.setup.data_prints">
+<span id="data-prints-setup-data-prints"></span><h2><a class="toc-backref" href="#id2">Data Prints (setup.data_prints)</a><a class="headerlink" href="#module-fns.setup.data_prints" title="Permalink to this headline"></a></h2>
+<p>Contains functions to print out lists of options for data-related input arguments</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.setup.data_prints.print_fields">
+<span class="sig-prename descclassname"><span class="pre">fns.setup.data_prints.</span></span><span class="sig-name descname"><span class="pre">print_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">npz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.setup.data_prints.print_fields" title="Permalink to this definition"></a></dt>
+<dd><p>Function that prints a list of radiographic/hydrodynamic fields in an npz file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>npz</strong> (<em>np.lib.npyio.NpzFile</em>) – a loaded .npz file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.setup.data_prints.print_samples">
+<span class="sig-prename descclassname"><span class="pre">fns.setup.data_prints.</span></span><span class="sig-name descname"><span class="pre">print_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.setup.data_prints.print_samples" title="Permalink to this definition"></a></dt>
+<dd><p>Function that prints how many samples (npz files) in a directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>search_dir</strong> (<em>str</em>) – file path to directory to search for samples in; include any restrictions for file name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-fns.setup.data_checks">
+<span id="data-checks-setup-data-checks"></span><h2><a class="toc-backref" href="#id3">Data Checks (setup.data_checks)</a><a class="headerlink" href="#module-fns.setup.data_checks" title="Permalink to this headline"></a></h2>
+<p>Contains functions to check that the data-related input arguments passed are valid</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.setup.data_checks.check_fields">
+<span class="sig-prename descclassname"><span class="pre">fns.setup.data_checks.</span></span><span class="sig-name descname"><span class="pre">check_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">npz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.setup.data_checks.check_fields" title="Permalink to this definition"></a></dt>
+<dd><p>Function that checks if all fields in a list exist in a npz file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>npz</strong> (<em>np.lib.npyio.NpzFile</em>) – a loaded .npz file</p></li>
+<li><p><strong>fields</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – list of the fields to test</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.setup.data_checks.check_key">
+<span class="sig-prename descclassname"><span class="pre">fns.setup.data_checks.</span></span><span class="sig-name descname"><span class="pre">check_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fixed_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.setup.data_checks.check_key" title="Permalink to this definition"></a></dt>
+<dd><p>Function that prints a list of unique variable indexes for a given fixed variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fixed_key</strong> (<em>str</em>) – the key for samples that is being checked</p></li>
+<li><p><strong>search_dir</strong> (<em>str</em>) – file path to directory to search for samples in</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.setup.data_checks.check_samples">
+<span class="sig-prename descclassname"><span class="pre">fns.setup.data_checks.</span></span><span class="sig-name descname"><span class="pre">check_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.setup.data_checks.check_samples" title="Permalink to this definition"></a></dt>
+<dd><p>Function that checks if the number of samples requested are aviailable in a directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_samples</strong> (<em>str</em>) – should be ‘All’, or an integer; number of samples the script will use</p></li>
+<li><p><strong>search_dir</strong> (<em>str</em>) – path to directory of .npz files</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>No Return Objects</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="outer.html" class="btn btn-neutral float-left" title="Outer Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coupondata.html" class="btn btn-neutral float-right" title="Coupon Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Skylar Callis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
