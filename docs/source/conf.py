@@ -25,7 +25,8 @@ extensions = ['sphinx.ext.autodoc',
 				'sphinx.ext.coverage', 
 				'sphinx.ext.napoleon', 
 				'sphinxarg.ext', 
-				'sphinx_toolbox.collapse']
+				'sphinx_toolbox.collapse',
+				'sphinx.ext.githubpages']
 
 # Autodoc Settings
 autodoc_member_order = 'bysource'
