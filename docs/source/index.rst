@@ -2,7 +2,7 @@
 Feature Interpretability Documentation
 ############################################
 
-This code contains tools for neural network interpretability by examining internal model states (features) in both Python TensorFlow and PyTorch. These tools were utilized on two LANL machine learning problems, detailed in the `documentation <https://lanl.github.io/feature_interpretability/html/index.html>`_ and in the ``examples`` directory.
+The Feature Interpretability module contains tools for neural network interpretability by examining internal model states (features) in both Python TensorFlow and PyTorch. The code can be viewed `here <https://github.com/lanl/feature_interpretability>`_. These tools were utilized on two LANL machine learning problems, detailed in the `documentation <https://lanl.github.io/feature_interpretability/html/index.html>`_ and in the ``examples`` directory.
 
 More details about the use of *feature interpretability* on the LANL coupon problem can be found in:
 
