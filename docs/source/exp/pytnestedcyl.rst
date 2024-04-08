@@ -31,8 +31,8 @@ To run the scripts on the pytorch nested cylinder networks, use the following ar
 
  - ``--PACKAGE pytorch``
  - ``--EXPERIMENT nestedcylinder``
- - ``--MODEL ../examples/pyt_nestedcyl/trained_hrMOICyl2sclPTW_model.pth``
- - ``--INPUT_FIELD hr_MOICyl``
+ - ``--MODEL ../examples/pyt_nestedcyl/trained_rho2PTW_model.pth``
+ - ``--INPUT_FIELD rho``
  - ``--INPUT_NPZ`` use any .npz file in ``../examples/pyt_nestedcyl/data/``
  - ``--INPUT_DIR ../examples/pyt_nestedcyl/data/``
  - ``--DESING_FILE ../examples/pyt_nestedcyl/nestedcyl_design_file.csv``
@@ -41,20 +41,18 @@ To run the scripts on the pytorch nested cylinder networks, use the following ar
 Nested Cylinder Data
 =========================
 
-The file names of nested cylinder data contain multiple pieces of information about their contents. The two relevent componets are the **sclPTW** and the **idx**:
+The file names of nested cylinder data contain multiple pieces of information about their contents. The two relevent componets are the **id** and the **idx**:
 
-- The *sclPTW_* is followed by a number identifying the experiment ID. This ID corresponds with a scale value for the PTW strength model. This scale value is the only prediction from the nestedcylinder networks. 
-- The *idx* specifies what time step the simulation was at. Nested cylinder networks are only trained on samples from idx00130.
+- The *id* is followed by a number identifying the experiment ID. This ID corresponds with a scale value for the PTW strength model. This scale value is the only prediction from the nestedcylinder networks. 
+- The *idx* specifies what time step the simulation was at. The value of the ``sim_time`` will be identical across files with identical *idx*s.
 
 Each ``.npz`` nested cylinder data file contains the following fields:
 
  - *sim_time* (scalar): simulation time stamp corresponding to a unique *idx* value
- - *rho* (2D array): density of entire experiment
- - *hr_wallBottom1*, *hr_wallBottom2*, *hr_wallBottom3* (2D arrays): density of a bottom wall component
- - *hr_wallCorner*, *hr_wallRight1*, *hr_wallRight2*, *hr_wallRight3* (2D arrays): density of a wall component
- - *hr_mainchargeBottom1*, *hr_mainchargeBottom2*, *hr_mainchargeCorner*, *hr_mainchargeRight1*, *hr_mainchargeRight2* (2D arrays): density of a main charge component
+ - *rho* (2D array): density training field (use ``-IN_FIELD rho``)
+ - *hr_outerWall*, *hr_bottomWall*, *hr_mcSide*, *hr_mcBottom*, *hr_innerCylClide*, *hr_innerCylBottom*, *hr_MOI (2D arrays): density of simulation compoment
  - *hr_innerCylBottom*, *hr_innerCylCorner*, *hr_innerCylRight* (2D arrays): density of an inner cylinder component
- - *hr_MOICyl* (2D array): density of the material of interest training field (use ``-IN_FIELD hr_MOICyl``)
+ - *volhr_outerWall*, *volhr_bottomWall*, *volhr_mcSide*, *volhr_mcBottom*, *volhr_innerCylSide*, *volhr_innerCylBottom*, *volhr_MOI* (shape): thing
  - *pressure* (2D array)
  - *temperature* (2D array)
  - *melt_state* (2D array): binary array of if a cell has melted
@@ -85,16 +83,13 @@ Model Layers
 The layers in model follow the following naming convention:
 
 - **in???**: layer near top of the network
-- **??Conv**: 2D convolutional layer
-- **??ConvBatch**: 2D batch normalization layer
-- **??ConvActivation**: SiLU activation layer
-- **interp???.##**: layer in "interpretability stack"
-- **interpLayer.##**: 2D convolutional layer in "interpretability stack"
-- **interpBatchNorms.##**: 2D batch normalization layer in "interpretability stack"
-- **interpActivations.##**: SiLU activation layer in "interpretability stack"
-- **r#???**: layer that reduces internal layer size by using a stride ≠ (1,1)
-- **end???**: layer near the end of the layer
-- **h#**: linear hidden layer
-- **h#Activation**: SiLU activation layer after a hidden layer
+- **??Conv??**: 2D convolutional layer
+- **??Norm??**: 2D batch normalization layer
+- **??Activation**: GELU activation layer
+- **interp_module.??.##**: layer in "interpretability stack"
+- **reduction_module.??.##**: layer in the "reduction stack", which reduced layer size by using a stride ≠ (1,1)
+- **end???**: layer near the end of the model
+- **hidden**: linear hidden layer
+- **idden#Activation**: GELU activation layer after a hidden layer
 - **linOut**: linear layer that generates output
-- **flattenLayer**: ``torch.nn.Flatten()`` layer
+- **flattenLayer_##**: ``torch.nn.Flatten()`` layer
