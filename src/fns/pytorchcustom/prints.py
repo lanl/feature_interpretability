@@ -40,6 +40,6 @@ def print_features(model):
         Returns:
 			No Return Objects
 	"""
-	n_fts = model.Nfilters
+	n_fts = model.features
 	print("Model has "+str(n_fts)+" features. \n")
 

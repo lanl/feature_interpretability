@@ -18,34 +18,19 @@ import fns
 #############################
 ## Load Pytorch Model
 #############################
-def load_model_class(model_class: str):
-	""" Function to import a pytorch model class from the syntheticnestedcyldata directory
-
-	    Args:
-	        model_class (str): name of file containing model class (file name must be the same as the model class name)
-	    
-	    Returns:
-			No Return Objects
-    """
-	exec('import fns.pytorchcustom.'+model_class+' as '+model_class)
-	globals()[model_class] = eval(model_class)
-
-def load_model(model_path: str, model_class: str, device: torch.device):
+def load_model(model_path: str, model, device: torch.device):
 	""" Function to import a pytorch model from a saved checkpoint
 
 		Does not load optimizer, meaning the loaded model cannot be trained further
 
 		Args:
 			model_path (str): path to saved pytorch model checkpoint
-			model_class (str): name of file containing model class (file name must be the same as the model class name)
+			model (initiated pytorch model) 
 			device (torch.device): device index to select
 
 		Returns:
 			model (loaded pytorch model)
 	"""
-	load_model_class(model_class)
-	model = eval(model_class+'.'+model_class+'([4, 1, 1700, 500]).to(device)')
-
 	loadedCheckpoint = torch.load(model_path, map_location=device)
 	model.load_state_dict(loadedCheckpoint["modelState"])
 
