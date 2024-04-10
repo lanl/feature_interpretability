@@ -90,6 +90,6 @@ The layers in model follow the following naming convention:
 - **reduction_module.??.##**: layer in the "reduction stack", which reduced layer size by using a stride ≠ (1,1)
 - **end???**: layer near the end of the model
 - **hidden**: linear hidden layer
-- **idden#Activation**: GELU activation layer after a hidden layer
+- **hidden#Activation**: GELU activation layer after a hidden layer
 - **linOut**: linear layer that generates output
 - **flattenLayer_##**: ``torch.nn.Flatten()`` layer
