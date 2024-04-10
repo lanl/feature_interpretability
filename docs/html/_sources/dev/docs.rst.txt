@@ -10,4 +10,4 @@ To generate the most up-to-date documetaion, run the following commands in the `
  - ``make html`` to create the new docs
  - open ``./docs/build/html/index.html`` to view rendered docs
 
-The ``./docs/build/`` directory is not tracked by git, so it is the user's responsibility to generate documentation from the tracked ``./docs/souce/`` files.
+Rendered documentation is `hosted on GitHub <https://lanl.github.io/feature_interpretability/html/index.html>`_.

@@ -4,10 +4,6 @@ Pytorch Nested Cylinder Models
 
 Straightfoward CNNs were developed in pytorch to estimate the scaling of a Preston-Tonks-Wallace (PTW) strength model from a nested cylinder experiment.
 
-.. attention::
-   
-   Nested cylinder examples are not currently included in the open source edition of this code. As such, when a script is passed ``--EXPERIMENT nestedcylinder``, it raises a ``NotImplementedError``. Nested cylinder examples are expected to be added in February 2024.
-
 .. contents:: Table of Contents:
   :local:
   :depth: 2 
@@ -15,9 +11,9 @@ Straightfoward CNNs were developed in pytorch to estimate the scaling of a Prest
 Model Inputs & Outputs
 =============================
 
-Networks trained on nested cylinder data take as input an image showing the density of the Material Of Interest (MOI) in the nested cylinder experiment. An example MOI density is shown below.
+Networks trained on nested cylinder data take as input an image showing the density throughout the experiment. An example density field is shown below.
 
- .. image:: COMING_SOON.png
+ .. image:: nestedcyl_density_input.png
    :scale: 100 %
    :alt: nested cylinder experiment density of material of interest
    :align: center
@@ -36,15 +32,19 @@ To run the scripts on the pytorch nested cylinder networks, use the following ar
  - ``--INPUT_NPZ`` use any .npz file in ``../examples/pyt_nestedcyl/data/``
  - ``--INPUT_DIR ../examples/pyt_nestedcyl/data/``
  - ``--DESING_FILE ../examples/pyt_nestedcyl/nestedcyl_design_file.csv``
- - ``--FIXED_KEY idx00130``, or ``--FIXED_KEY None``  
+ - ``--FIXED_KEY id0643``, ``--FIXED_KEY idx00130``, or ``--FIXED_KEY None``  
 
 Nested Cylinder Data
 =========================
 
 The file names of nested cylinder data contain multiple pieces of information about their contents. The two relevent componets are the **id** and the **idx**:
 
-- The *id* is followed by a number identifying the experiment ID. This ID corresponds with a scale value for the PTW strength model. This scale value is the only prediction from the nestedcylinder networks. 
-- The *idx* specifies what time step the simulation was at. The value of the ``sim_time`` will be identical across files with identical *idx*s.
+- The *id* is followed by a number identifying the experiment ID. 
+   - The value of ``PTW_scale`` is identical across files with identical *id* 's.
+   - Data is included for *id0643* at all 22 timesteps.
+- The *idx* specifies what time step the simulation was at. 
+   - The value of the ``sim_time`` will be identical across files with identical *idx* 's.
+   - Data is included at *idx00112* for 31 differnt simulations.
 
 Each ``.npz`` nested cylinder data file contains the following fields:
 

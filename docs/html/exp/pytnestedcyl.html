@@ -114,61 +114,69 @@
   <section id="pytorch-nested-cylinder-models">
 <h1>Pytorch Nested Cylinder Models<a class="headerlink" href="#pytorch-nested-cylinder-models" title="Permalink to this headline"></a></h1>
 <p>Straightfoward CNNs were developed in pytorch to estimate the scaling of a Preston-Tonks-Wallace (PTW) strength model from a nested cylinder experiment.</p>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>Nested cylinder examples are not currently included in the open source edition of this code. As such, when a script is passed <code class="docutils literal notranslate"><span class="pre">--EXPERIMENT</span> <span class="pre">nestedcylinder</span></code>, it raises a <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code>. Nested cylinder examples are expected to be added in February 2024.</p>
-</div>
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title">Table of Contents:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#model-inputs-outputs" id="id1">Model Inputs &amp; Outputs</a></p></li>
-<li><p><a class="reference internal" href="#running-the-nested-cylinder-example" id="id2">Running the Nested Cylinder Example</a></p></li>
-<li><p><a class="reference internal" href="#nested-cylinder-data" id="id3">Nested Cylinder Data</a></p></li>
-<li><p><a class="reference internal" href="#model-architecture" id="id4">Model Architecture</a></p></li>
-<li><p><a class="reference internal" href="#model-layers" id="id5">Model Layers</a></p></li>
+<li><p><a class="reference internal" href="#model-inputs-outputs" id="id3">Model Inputs &amp; Outputs</a></p></li>
+<li><p><a class="reference internal" href="#running-the-nested-cylinder-example" id="id4">Running the Nested Cylinder Example</a></p></li>
+<li><p><a class="reference internal" href="#nested-cylinder-data" id="id5">Nested Cylinder Data</a></p></li>
+<li><p><a class="reference internal" href="#model-architecture" id="id6">Model Architecture</a></p></li>
+<li><p><a class="reference internal" href="#model-layers" id="id7">Model Layers</a></p></li>
 </ul>
 </div>
 <section id="model-inputs-outputs">
-<h2><a class="toc-backref" href="#id1">Model Inputs &amp; Outputs</a><a class="headerlink" href="#model-inputs-outputs" title="Permalink to this headline"></a></h2>
-<p>Networks trained on nested cylinder data take as input an image showing the density of the Material Of Interest (MOI) in the nested cylinder experiment. An example MOI density is shown below.</p>
+<h2><a class="toc-backref" href="#id3">Model Inputs &amp; Outputs</a><a class="headerlink" href="#model-inputs-outputs" title="Permalink to this headline"></a></h2>
+<p>Networks trained on nested cylinder data take as input an image showing the density throughout the experiment. An example density field is shown below.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../_images/COMING_SOON.png"><img alt="nested cylinder experiment density of material of interest" class="align-center" src="../_images/COMING_SOON.png" style="width: 390.0px; height: 260.0px;" /></a>
+<div><a class="reference internal image-reference" href="../_images/nestedcyl_density_input.png"><img alt="nested cylinder experiment density of material of interest" class="align-center" src="../_images/nestedcyl_density_input.png" style="width: 500.0px; height: 1000.0px;" /></a>
 </div></blockquote>
 <p>These models predict the value that the PTW strength model was scaled by.</p>
 </section>
 <section id="running-the-nested-cylinder-example">
-<h2><a class="toc-backref" href="#id2">Running the Nested Cylinder Example</a><a class="headerlink" href="#running-the-nested-cylinder-example" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id4">Running the Nested Cylinder Example</a><a class="headerlink" href="#running-the-nested-cylinder-example" title="Permalink to this headline"></a></h2>
 <p>To run the scripts on the pytorch nested cylinder networks, use the following arguments:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--PACKAGE</span> <span class="pre">pytorch</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--EXPERIMENT</span> <span class="pre">nestedcylinder</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--MODEL</span> <span class="pre">../examples/pyt_nestedcyl/trained_hrMOICyl2sclPTW_model.pth</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--INPUT_FIELD</span> <span class="pre">hr_MOICyl</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--MODEL</span> <span class="pre">../examples/pyt_nestedcyl/trained_rho2PTW_model.pth</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--INPUT_FIELD</span> <span class="pre">rho</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--INPUT_NPZ</span></code> use any .npz file in <code class="docutils literal notranslate"><span class="pre">../examples/pyt_nestedcyl/data/</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--INPUT_DIR</span> <span class="pre">../examples/pyt_nestedcyl/data/</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--DESING_FILE</span> <span class="pre">../examples/pyt_nestedcyl/nestedcyl_design_file.csv</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--FIXED_KEY</span> <span class="pre">idx00130</span></code>, or <code class="docutils literal notranslate"><span class="pre">--FIXED_KEY</span> <span class="pre">None</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--FIXED_KEY</span> <span class="pre">id0643</span></code>, <code class="docutils literal notranslate"><span class="pre">--FIXED_KEY</span> <span class="pre">idx00130</span></code>, or <code class="docutils literal notranslate"><span class="pre">--FIXED_KEY</span> <span class="pre">None</span></code></p></li>
 </ul>
 </div></blockquote>
 </section>
 <section id="nested-cylinder-data">
-<h2><a class="toc-backref" href="#id3">Nested Cylinder Data</a><a class="headerlink" href="#nested-cylinder-data" title="Permalink to this headline"></a></h2>
-<p>The file names of nested cylinder data contain multiple pieces of information about their contents. The two relevent componets are the <strong>sclPTW</strong> and the <strong>idx</strong>:</p>
+<h2><a class="toc-backref" href="#id5">Nested Cylinder Data</a><a class="headerlink" href="#nested-cylinder-data" title="Permalink to this headline"></a></h2>
+<p>The file names of nested cylinder data contain multiple pieces of information about their contents. The two relevent componets are the <strong>id</strong> and the <strong>idx</strong>:</p>
 <ul class="simple">
-<li><p>The <em>sclPTW_</em> is followed by a number identifying the experiment ID. This ID corresponds with a scale value for the PTW strength model. This scale value is the only prediction from the nestedcylinder networks.</p></li>
-<li><p>The <em>idx</em> specifies what time step the simulation was at. Nested cylinder networks are only trained on samples from idx00130.</p></li>
+<li><dl class="simple">
+<dt>The <em>id</em> is followed by a number identifying the experiment ID.</dt><dd><ul>
+<li><p>The value of <code class="docutils literal notranslate"><span class="pre">PTW_scale</span></code> is identical across files with identical <em>id</em> ‘s.</p></li>
+<li><p>Data is included for <em>id0643</em> at all 22 timesteps.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The <em>idx</em> specifies what time step the simulation was at.</dt><dd><ul>
+<li><p>The value of the <code class="docutils literal notranslate"><span class="pre">sim_time</span></code> will be identical across files with identical <em>idx</em> ‘s.</p></li>
+<li><p>Data is included at <em>idx00112</em> for 31 differnt simulations.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 <p>Each <code class="docutils literal notranslate"><span class="pre">.npz</span></code> nested cylinder data file contains the following fields:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p><em>sim_time</em> (scalar): simulation time stamp corresponding to a unique <em>idx</em> value</p></li>
-<li><p><em>rho</em> (2D array): density of entire experiment</p></li>
-<li><p><em>hr_wallBottom1</em>, <em>hr_wallBottom2</em>, <em>hr_wallBottom3</em> (2D arrays): density of a bottom wall component</p></li>
-<li><p><em>hr_wallCorner</em>, <em>hr_wallRight1</em>, <em>hr_wallRight2</em>, <em>hr_wallRight3</em> (2D arrays): density of a wall component</p></li>
-<li><p><em>hr_mainchargeBottom1</em>, <em>hr_mainchargeBottom2</em>, <em>hr_mainchargeCorner</em>, <em>hr_mainchargeRight1</em>, <em>hr_mainchargeRight2</em> (2D arrays): density of a main charge component</p></li>
+<li><p><em>rho</em> (2D array): density training field (use <code class="docutils literal notranslate"><span class="pre">-IN_FIELD</span> <span class="pre">rho</span></code>)</p></li>
+<li><p><em>hr_outerWall</em>, <em>hr_bottomWall</em>, <em>hr_mcSide</em>, <em>hr_mcBottom</em>, <em>hr_innerCylClide</em>, <em>hr_innerCylBottom</em>, <a href="#id1"><span class="problematic" id="id2">*</span></a>hr_MOI (2D arrays): density of simulation compoment</p></li>
 <li><p><em>hr_innerCylBottom</em>, <em>hr_innerCylCorner</em>, <em>hr_innerCylRight</em> (2D arrays): density of an inner cylinder component</p></li>
-<li><p><em>hr_MOICyl</em> (2D array): density of the material of interest training field (use <code class="docutils literal notranslate"><span class="pre">-IN_FIELD</span> <span class="pre">hr_MOICyl</span></code>)</p></li>
+<li><p><em>volhr_outerWall</em>, <em>volhr_bottomWall</em>, <em>volhr_mcSide</em>, <em>volhr_mcBottom</em>, <em>volhr_innerCylSide</em>, <em>volhr_innerCylBottom</em>, <em>volhr_MOI</em> (shape): thing</p></li>
 <li><p><em>pressure</em> (2D array)</p></li>
 <li><p><em>temperature</em> (2D array)</p></li>
 <li><p><em>melt_state</em> (2D array): binary array of if a cell has melted</p></li>
@@ -186,30 +194,27 @@
 </div></blockquote>
 </section>
 <section id="model-architecture">
-<h2><a class="toc-backref" href="#id4">Model Architecture</a><a class="headerlink" href="#model-architecture" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id6">Model Architecture</a><a class="headerlink" href="#model-architecture" title="Permalink to this headline"></a></h2>
 <p>These models consist of a single branch that passes the image input straight forward through the network.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/pytnestedcyl_networkdiagram.png"><img alt="tensorflow coupon branched nerual network diagram" class="align-center" src="../_images/pytnestedcyl_networkdiagram.png" style="width: 205.0px; height: 1451.0px;" /></a>
 </div></blockquote>
 </section>
 <section id="model-layers">
-<h2><a class="toc-backref" href="#id5">Model Layers</a><a class="headerlink" href="#model-layers" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id7">Model Layers</a><a class="headerlink" href="#model-layers" title="Permalink to this headline"></a></h2>
 <p>The layers in model follow the following naming convention:</p>
 <ul class="simple">
 <li><p><strong>in???</strong>: layer near top of the network</p></li>
-<li><p><strong>??Conv</strong>: 2D convolutional layer</p></li>
-<li><p><strong>??ConvBatch</strong>: 2D batch normalization layer</p></li>
-<li><p><strong>??ConvActivation</strong>: SiLU activation layer</p></li>
-<li><p><strong>interp???.##</strong>: layer in “interpretability stack”</p></li>
-<li><p><strong>interpLayer.##</strong>: 2D convolutional layer in “interpretability stack”</p></li>
-<li><p><strong>interpBatchNorms.##</strong>: 2D batch normalization layer in “interpretability stack”</p></li>
-<li><p><strong>interpActivations.##</strong>: SiLU activation layer in “interpretability stack”</p></li>
-<li><p><strong>r#???</strong>: layer that reduces internal layer size by using a stride ≠ (1,1)</p></li>
-<li><p><strong>end???</strong>: layer near the end of the layer</p></li>
-<li><p><strong>h#</strong>: linear hidden layer</p></li>
-<li><p><strong>h#Activation</strong>: SiLU activation layer after a hidden layer</p></li>
+<li><p><strong>??Conv??</strong>: 2D convolutional layer</p></li>
+<li><p><strong>??Norm??</strong>: 2D batch normalization layer</p></li>
+<li><p><strong>??Activation</strong>: GELU activation layer</p></li>
+<li><p><strong>interp_module.??.##</strong>: layer in “interpretability stack”</p></li>
+<li><p><strong>reduction_module.??.##</strong>: layer in the “reduction stack”, which reduced layer size by using a stride ≠ (1,1)</p></li>
+<li><p><strong>end???</strong>: layer near the end of the model</p></li>
+<li><p><strong>hidden</strong>: linear hidden layer</p></li>
+<li><p><strong>idden#Activation</strong>: GELU activation layer after a hidden layer</p></li>
 <li><p><strong>linOut</strong>: linear layer that generates output</p></li>
-<li><p><strong>flattenLayer</strong>: <code class="docutils literal notranslate"><span class="pre">torch.nn.Flatten()</span></code> layer</p></li>
+<li><p><strong>flattenLayer_##</strong>: <code class="docutils literal notranslate"><span class="pre">torch.nn.Flatten()</span></code> layer</p></li>
 </ul>
 </section>
 </section>

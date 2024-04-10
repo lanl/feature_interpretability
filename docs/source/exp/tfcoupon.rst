@@ -48,8 +48,12 @@ Coupon Data
 
 The file names of coupon data contain multiple pieces of information about their contents. The two relevent componets are the **tpl** and the **idx**:
 
-- The *tpl* is followed by a number identifying a simulation ID. The values of :math:`Y_{spall}, log_{10}(\phi_0), \eta` are identical across files with idential *tpl* s.  
-- The *idx* specifies what time step the simulation was at. The value of :math:`T_{sim}` will be identical across files with identical *idx* s.
+- The *tpl* is followed by a number identifying a simulation ID. 
+   - The values of :math:`Y_{spall}, log_{10}(\phi_0), \eta` are identical across files with idential *tpl* 's. 
+   - Data is included for *tpl112* at all 26 timesteps. 
+- The *idx* specifies what time step the simulation was at. 
+   - The value of :math:`T_{sim}` will be identical across files with identical *idx* 's.
+   - Data is included at *idx00110* for 31 differnt simulations.
 
 Each ``.npz`` coupon data file contains the following fields:
 
