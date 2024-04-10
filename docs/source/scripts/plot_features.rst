@@ -18,10 +18,10 @@ Plot Features
 
   |
 
-  .. image:: ./figures/pyt_nestedcyl/COMING_SOON.png
+  .. image:: ./figures/pyt_nestedcyl/interp_module_interpActivations_10_all_features.png
    :alt: Features Extracted from the Pytorch Nested Cylinder Network
    :align: center
-   :scale: 100%
+   :scale: 50%
 
   .. centered:: *Features Extracted from the Pytorch Nested Cylinder Network*
 
