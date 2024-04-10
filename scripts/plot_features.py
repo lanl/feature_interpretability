@@ -11,7 +11,7 @@ Input Line for TF Coupon Models:
 ``python plot_features.py -P tensorflow -E coupon -M ../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -IN ../examples/tf_coupon/data/r60um_tpl112_complete_idx00110.npz -DF ../examples/tf_coupon/coupon_design_file.csv -L activation_15 -T Grid -NM ft01 -S ../examples/tf_coupon/figures/``
 
 Input Line for PYT Nested Cylinder Models:
-``COMING SOON``
+``python plot_features.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.path -IF rho -IN ../examples/pyt_nestedcyl/data/nc231213_Sn_id0643_pvi_idx00112.npz -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T Grid -NM ft01 -S ../examples/pyt_nestedcyl/figures/``
 
 """
 
@@ -221,7 +221,8 @@ if __name__ == '__main__':
 		ft_mat = pytc.fts.feature_extractor(model, lay, model_in, norm, device)
 
 	## Save Extracted Features
-	fns.save.features2npz(ft_mat, save_path = fig_path+lay+'_all_features' )
+	lay = lay.replace('.', '_')
+	fns.save.features2npz(ft_mat, save_path = os.path.join(fig_path, lay+'_all_features' ))
 
 	print('Model loaded sucessfully; features extracted and saved.')
 
@@ -244,7 +245,7 @@ if __name__ == '__main__':
 		plt.clim(lims)
 		fig.suptitle('Features from '+lay)
 
-		fig.savefig(fig_path+lay+'_all_features.png')
+		fig.savefig(os.path.join(fig_path, lay+'_all_features.png'))
 		plt.close()
 
 	elif features == ['All']: #Plot all features in thier own figures
@@ -256,7 +257,7 @@ if __name__ == '__main__':
 			fig.colorbar(im, label='Activation Intensity')
 			plt.clim(lims)
 			
-			fig.savefig(fig_path+lay+'_feature_'+str(i+1)+'.png')
+			fig.savefig(os.path.join(fig_path, lay+'_feature_'+str(i+1)+'.png'))
 			plt.close()
 
 	else: #Plotting a specific list of features
@@ -269,7 +270,7 @@ if __name__ == '__main__':
 			fig.colorbar(im, label='Activation Intensity')
 			plt.clim(lims)
 
-			fig.savefig(fig_path+lay+'_feature_'+str(i+1)+'.png')
+			fig.savefig(os.path.join(fig_path, lay+'_feature_'+str(i+1)+'.png'))
 			plt.close()
 
 	print('Plots generated and saved.')
