@@ -6,7 +6,7 @@ Generates a heatmap plot of the 2D auto-cross-correlation-coefficients across hy
 Fixed key (``-XK``) specifies what subset of data to consider
  - 'None' can be passed to consider any input with no restrictions
  - For coupon data, fixed keys must be in the form 'tpl###' or 'idx#####'
- - For nested cylinder data, fixed keys must be in the form 'sclPTW_###' or 'idx#####'
+ - For nested cylinder data, fixed keys must be in the form 'id####' or 'idx#####'
 
 Exports correlation coeffients as a pandas-readable .csv
 
@@ -17,7 +17,7 @@ Input Line for Coupon Data:
 ``python field_autocorr.py -E coupon -ID ../examples/tf_coupon/data/ -F All -S ../examples/tf_coupon/figures/``
 
 Input Line for Nested Cylinder Data:
-``COMING SOON``
+``python field_autocorr.py -E nestedcylinder -ID ../examples/pyt_nestedcyl/data/ -F All -S ../examples/pyt_nestedcyl/figures/``
 """
 
 #############################
@@ -109,13 +109,12 @@ if __name__ == '__main__':
         import fns.coupondata as cp
         prefix = 'cp.'
         import fns.coupondata.prints as cpprints
-        search_dir = input_dir+'r*tpl*idx*.npz'
+        search_dir = os.path.join(input_dir, 'r*tpl*idx*.npz')
     elif EXP == 'nestedcylinder':
-        raise NotImplementedError('Nested cylinder examples not included in open source.')
         import fns.nestedcylinderdata as nc
         prefix = 'nc.'
         import fns.nestedcylinderdata.prints as ncprints
-        search_dir = input_dir+'ncyl_sclPTW*idx*.npz'
+        search_dir = os.path.join(input_dir, 'nc231213*pvi*.npz')
 
     if file_list_path != 'MAKE':
         ## Import given file list
@@ -127,7 +126,7 @@ if __name__ == '__main__':
         if PRINT_SAMPLES: print(str(num_samples)+' samples found in '+file_list_path+'.\n')
         if PRINT_KEYS or PRINT_SAMPLES: sys.exit()
 
-        file_path = fig_path+'field_autocorr'
+        file_path = os.path.join(fig_path, 'field_autocorr')
 
     elif file_list_path == 'MAKE':
 
@@ -144,7 +143,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'r*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'r*'+fixed_key+'*.npz')
 
         elif EXP == 'nestedcylinder':
             ## Prints Keys
@@ -159,7 +158,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'ncyl*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'nc231213*'+fixed_key+'*.npz')
             # END if EXP=='nestedcylinder'
 
         ## Check Fixed Key
@@ -174,7 +173,7 @@ if __name__ == '__main__':
         setup.data_checks.check_samples(num_samples, search_dir)
         
         ## Make File List
-        file_path = fig_path+'field_autocorr'
+        file_path = os.path.join(fig_path, 'field_autocorr')
         n_samples, sample_list = fns.save.makefilelist(search_dir, num_samples=num_samples, save_path=file_path, save=True)
         # END if file_list_path=='MAKE'
 
