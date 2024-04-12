@@ -7,7 +7,7 @@ Generates a heatmap plot of the 2D auto-cross-correlation-coefficients across hy
 Fixed key (``-XK``) specifies what subset of data to consider
  - 'None' can be passed to consider any input with no restrictions
  - For coupon data, fixed keys must be in the form 'tpl###' or 'idx#####'
- - For nested cylinder data, fixed keys must be in the form 'sclPTW_###' or 'idx#####'
+ - For nested cylinder data, fixed keys must be in the form 'id####' or 'idx#####'
 
 Exports correlation coeffients as a pandas-readable .csv
 
@@ -18,7 +18,7 @@ Input Line for TF Coupon Models:
 ``python feature_field_corr.py -P tensorflow -E coupon -M ../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -ID ../examples/tf_coupon/data/ -DF ../examples/tf_coupon/coupon_design_file.csv -L activation_15 -T All -NM ft01 -F All -S ../examples/tf_coupon/figures/``
 
 Input Line for PYT Nested Cylinder Models:
-``COMING SOON``
+``python feature_field_corr.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.path -IF rho -ID ../examples/pyt_nestedcyl/data/ -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T All -NM ft01 -F All -S ../examples/pyt_nestedcyl/figures/``
 """
 
 #############################
@@ -133,19 +133,19 @@ if __name__ == '__main__':
         import fns.coupondata as cp
         prefix = 'cp.'
         import fns.coupondata.prints as cpprints
-        search_dir = input_dir+'r*tpl*idx*.npz'
+        search_dir = os.path.join(input_dir, 'r*tpl*idx*.npz')
     elif EXP == 'nestedcylinder':
-        raise NotImplementedError('Nested cylinder examples not included in open source.')
         import fns.nestedcylinderdata as nc
         prefix = 'nc.'
         import fns.nestedcylinderdata.prints as ncprints
-        search_dir = input_dir+'ncyl_sclPTW*idx*.npz'
+        search_dir = os.path.join(input_dir, 'nc231213*pvi*.npz')
 
     ## Create the File list 
     if file_list_path != 'MAKE':
         ## Import given file list
         n_samples, sample_list = fns.misc.load_filelist(file_list_path)
         fixed_key = eval(prefix + 'process.findkey(sample_list)')
+        file_path = os.path.join(fig_path, 'featurefieldcorr')
 
         ## Prints
         if PRINT_KEYS: print('Key present in '+file_list_path+' is '+fixed_key)
@@ -169,7 +169,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'r*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'r*'+fixed_key+'*.npz')
 
         elif EXP == 'nestedcylinder':
             ## Prints Keys
@@ -184,7 +184,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'ncyl*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'nc231213*'+fixed_key+'*.npz')
             # END if EXP=='nestedcylinder'
 
         ## Check Fixed Key
@@ -199,7 +199,7 @@ if __name__ == '__main__':
         setup.data_checks.check_samples(num_samples, search_dir)
         
         ## Make File List
-        file_path = fig_path+'featurefieldcorr'
+        file_path = os.path.join(fig_path, 'featurefieldcorr')
         n_samples, sample_list = fns.save.makefilelist(search_dir, num_samples=num_samples, save_path=file_path, save=True)
         # END if file_list_path=='MAKE'
 
@@ -306,8 +306,16 @@ if __name__ == '__main__':
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         ## Load Model
-        model_class = 'NCylANN_V1'
-        model = pytc.fts.load_model(model_path, model_class, device)
+        import fns.pytorchcustom.field2PTW_model_definition as field2PTW_model
+        model = field2PTW_model.field2PTW(img_size = (1, 1700, 500),
+                                            size_threshold = (8, 8),
+                                            kernel = 5,
+                                            features = 12, 
+                                            interp_depth = 12,
+                                            conv_onlyweights = False,
+                                            batchnorm_onlybias = False,
+                                            act_layer = torch.nn.GELU,
+                                            hidden_features = 20)
 
         ## Prints
         if PRINT_LAYERS: pytc.prints.print_layers(model)

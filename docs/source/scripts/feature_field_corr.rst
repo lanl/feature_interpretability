@@ -18,10 +18,9 @@ Feature - Field Correlation
 
   |
 
-  .. image:: ./figures/pyt_nestedcyl/COMING_SOON.png
+  .. image:: ./figures/pyt_nestedcyl/featurefieldcorr.png
    :alt: Correlation of Nested Cylinder Fields and Corresponding Features
    :align: center
-   :scale: 100%
 
   .. centered:: *Correlation of Nested Cylinder Fields and Corresponding Features*
 

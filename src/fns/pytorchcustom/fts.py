@@ -99,7 +99,7 @@ def parse_features(model, features: list[str]):
 		print("Features=Grid is not a valid selection for this program; Use 'All' or a list of integers.\n")
 		sys.exit()
 	elif features == ['All']:
-		n_features = model.Nfilters
+		n_features = model.features
 		features = np.arange(n_features)
 	else:
 		n_features = np.size(features)
