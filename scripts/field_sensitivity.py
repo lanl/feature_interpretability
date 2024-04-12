@@ -7,7 +7,7 @@ Plots the average and standard deviation of fields from a set of samples
 Fixed key (``-XK``) specifies what subset of data to consider
  - 'None' can be passed to consider any input with no restrictions
  - For coupon data, fixed keys must be in the form 'tpl###' or 'idx#####'
- - For nested cylinder data, fixed keys must be in the form 'sclPTW_###' or 'idx#####'
+ - For nested cylinder data, fixed keys must be in the form 'id####' or 'idx#####'
 
 Saves all averages and standard deviations to a .npz file.
 
@@ -18,7 +18,7 @@ Input Line for Coupon Data:
 ``python field_sensitivity.py -E coupon -ID ../examples/tf_coupon/data/ -F All -S ../examples/tf_coupon/figures/``
 
 Input Line for Nested Cylinder Data:
-``COMING SOON``
+``python field_sensitivity.py -E nestedcylinder -ID ../examples/pyt_nestedcyl/data/ -F All -S ../examples/pyt_nestedcyl/figures/``
 """
 
 #############################
@@ -122,13 +122,12 @@ if __name__ == '__main__':
         import fns.coupondata as cp
         prefix = 'cp.'
         import fns.coupondata.prints as cpprints
-        search_dir = input_dir+'r*tpl*idx*.npz'
+        search_dir = os.path.join(input_dir, 'r*tpl*idx*.npz')
     elif EXP == 'nestedcylinder':
-        raise NotImplementedError('Nested cylinder examples not included in open source.')
         import fns.nestedcylinderdata as nc
         prefix = 'nc.'
         import fns.nestedcylinderdata.prints as ncprints
-        search_dir = input_dir+'ncyl_sclPTW*idx*.npz'
+        search_dir = os.path.join(input_dir, 'nc231213*pvi*.npz')
 
     if file_list_path != 'MAKE':
         ## Import given file list
@@ -156,7 +155,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'r*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'r*'+fixed_key+'*.npz')
 
         elif EXP == 'nestedcylinder':
             ## Prints Keys
@@ -171,7 +170,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'ncyl*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'nc231213*'+fixed_key+'*.npz')
             # END if EXP=='nestedcylinder'
 
         ## Check Fixed Key

@@ -123,9 +123,9 @@
 <summary>Collapse Pytorch Nested Cylinder Figure</summary><div class="line-block">
 <div class="line"><br /></div>
 </div>
-<a class="reference internal image-reference" href="../_images/COMING_SOON1.png"><img alt="Standard Deviation of Nested Cylinder hr_MOICyl Field on idx001100 Data" class="align-center" src="../_images/COMING_SOON1.png" style="width: 390.0px; height: 260.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/rho_std_idx00112.png"><img alt="Standard Deviation of Nested Cylinder Density (rho) Field on idx00112 Data" class="align-center" src="../_images/rho_std_idx00112.png" style="width: 350.0px; height: 700.0px;" /></a>
 <p class="centered">
-<strong><em>Standard Deviation of Nested Cylinder hr_MOICyl Field on idx001100 Data</em></strong></p></details><div class="line-block">
+<strong><em>Standard Deviation of Nested Cylinder Density (rho) Field on idx00112 Data</em></strong></p></details><div class="line-block">
 <div class="line"><br /></div>
 </div>
 <section id="module-field_sensitivity">
@@ -139,7 +139,7 @@
 <dt>Fixed key (<code class="docutils literal notranslate"><span class="pre">-XK</span></code>) specifies what subset of data to consider</dt><dd><ul class="simple">
 <li><p>‘None’ can be passed to consider any input with no restrictions</p></li>
 <li><p>For coupon data, fixed keys must be in the form ‘tpl###’ or ‘idx#####’</p></li>
-<li><p>For nested cylinder data, fixed keys must be in the form ‘sclPTW_###’ or ‘idx#####’</p></li>
+<li><p>For nested cylinder data, fixed keys must be in the form ‘id####’ or ‘idx#####’</p></li>
 </ul>
 </dd>
 </dl>
@@ -151,17 +151,18 @@
 <p>Input Line for Coupon Data:
 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">field_sensitivity.py</span> <span class="pre">-E</span> <span class="pre">coupon</span> <span class="pre">-ID</span> <span class="pre">../examples/tf_coupon/data/</span> <span class="pre">-F</span> <span class="pre">All</span> <span class="pre">-S</span> <span class="pre">../examples/tf_coupon/figures/</span></code></p>
 <p>Input Line for Nested Cylinder Data:
-<code class="docutils literal notranslate"><span class="pre">COMING</span> <span class="pre">SOON</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">field_sensitivity.py</span> <span class="pre">-E</span> <span class="pre">nestedcylinder</span> <span class="pre">-ID</span> <span class="pre">../examples/pyt_nestedcyl/data/</span> <span class="pre">-F</span> <span class="pre">All</span> <span class="pre">-S</span> <span class="pre">../examples/pyt_nestedcyl/figures/</span></code></p>
 </section>
 <section id="arguments">
 <h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
 <p><p>Plots the average and standard deviation of hydrodynamic fields extracted from a set of related inputs</p>
 </p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">python</span> <span class="n">field_sensitivity</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">EXPERIMENT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">INPUT_DIR</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">FILE_LIST</span><span class="p">]</span>
-                                   <span class="p">[</span><span class="o">--</span><span class="n">PRINT_FIELDS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_KEYS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_SAMPLES</span><span class="p">]</span>
-                                   <span class="p">[</span><span class="o">--</span><span class="n">FIELDS</span>  <span class="p">[</span><span class="o">...</span><span class="p">]]</span> <span class="p">[</span><span class="o">--</span><span class="n">FIXED_KEY</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
-                                   <span class="p">[</span><span class="o">--</span><span class="n">ALPHA1</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">ALPHA2</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">COLOR1</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">COLOR2</span><span class="p">]</span>
-                                   <span class="p">[</span><span class="o">--</span><span class="n">SAVE_FIG</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">python</span> <span class="n">field_sensitivity</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">EXPERIMENT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">INPUT_DIR</span><span class="p">]</span>
+                                   <span class="p">[</span><span class="o">--</span><span class="n">FILE_LIST</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_FIELDS</span><span class="p">]</span>
+                                   <span class="p">[</span><span class="o">--</span><span class="n">PRINT_KEYS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_SAMPLES</span><span class="p">]</span>
+                                   <span class="p">[</span><span class="o">--</span><span class="n">FIELDS</span>  <span class="p">[</span><span class="o">...</span><span class="p">]]</span> <span class="p">[</span><span class="o">--</span><span class="n">FIXED_KEY</span><span class="p">]</span>
+                                   <span class="p">[</span><span class="o">--</span><span class="n">NUM_SAMPLES</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">ALPHA1</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">ALPHA2</span><span class="p">]</span>
+                                   <span class="p">[</span><span class="o">--</span><span class="n">COLOR1</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">COLOR2</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">SAVE_FIG</span><span class="p">]</span>
 </pre></div>
 </div>
 <section id="named-arguments">
