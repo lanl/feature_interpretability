@@ -209,7 +209,7 @@ if __name__ == '__main__':
         setup.data_checks.check_samples(num_samples, search_dir)
         
         ## Make File List
-        file_path = fig_path+'feature_sensitivity'
+        file_path = os.path.join(fig_path, 'feature_sensitivity')
         n_samples, sample_list = fns.save.makefilelist(search_dir, num_samples=num_samples, save_path=file_path, save=True)
         # END if file_list_path=='MAKE'
 
