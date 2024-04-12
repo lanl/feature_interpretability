@@ -48,7 +48,7 @@ def check_features(model, features: list[str]):
 	elif features == ['All']:
 		pass
 	else:
-		n_fts = model.Nfilters
+		n_fts = model.features
 		for ft in features:
 			if not ft.isdigit():
 				raise ValueError('Feature given is not an integer.')
