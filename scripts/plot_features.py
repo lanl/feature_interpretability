@@ -207,6 +207,7 @@ if __name__ == '__main__':
 											batchnorm_onlybias = False,
 											act_layer = torch.nn.GELU,
 											hidden_features = 20)
+		model = pytc.fts.load_model(model_path, model, device)
 
 		## Prints
 		if PRINT_LAYERS: pytc.prints.print_layers(model)
