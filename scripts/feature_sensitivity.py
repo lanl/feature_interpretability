@@ -11,7 +11,7 @@ Plots average and standard deviations in seperate figures
 Fixed key (``-XK``) specifies what subset of data to consider
  - 'None' can be passed to consider any input with no restrictions
  - For coupon data, fixed keys must be in the form 'tpl###' or 'idx#####'
- - For nested cylinder data, fixed keys must be in the form 'sclPTW_###' or 'idx#####'
+ - For nested cylinder data, fixed keys must be in the form 'id####' or 'idx#####'
 
 Saves all averages and standard deviations to a .npz file.
 
@@ -22,7 +22,7 @@ Input Line for TF Coupon Models:
 ``python feature_sensitivity.py -P tensorflow -E coupon -M ../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -ID ../examples/tf_coupon/data/ -DF ../examples/tf_coupon/coupon_design_file.csv -L activation_15 -T Grid -NM ft01 -XK idx00110 -S ../examples/tf_coupon/figures/``
 
 Input Line for PYT Nested Cylinder Models: 
-``COMING SOON``
+``python feature_sensitivity.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.path -IF rho -ID ../examples/pyt_nestedcyl/data/ -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T Grid -NM ft01 -XK idx00112 -S ../examples/pyt_nestedcyl/figures/``
 """
 
 
@@ -146,13 +146,12 @@ if __name__ == '__main__':
         import fns.coupondata as cp
         prefix = 'cp.'
         import fns.coupondata.prints as cpprints
-        search_dir = input_dir+'r*tpl*idx*.npz'
+        search_dir = os.path.join(input_dir, 'r*tpl*idx*.npz')
     elif EXP == 'nestedcylinder':
-        raise NotImplementedError('Nested cylinder examples not included in open source.')
         import fns.nestedcylinderdata as nc
         prefix = 'nc.'
         import fns.nestedcylinderdata.prints as ncprints
-        search_dir = input_dir+'ncyl_sclPTW*idx*.npz'
+        search_dir = os.path.join(input_dir, 'nc231213*pvi*.npz')
 
     if file_list_path != 'MAKE':
         ## Import given file list
@@ -180,7 +179,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'r*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'r*'+fixed_key+'*.npz')
 
         elif EXP == 'nestedcylinder':
             ## Prints Keys
@@ -195,7 +194,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'ncyl*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'nc231213*'+fixed_key+'*.npz')
             # END if EXP=='nestedcylinder'
 
         ## Check Fixed Key
@@ -299,8 +298,16 @@ if __name__ == '__main__':
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         ## Load Model
-        model_class = 'NCylANN_V1'
-        model = pytc.fts.load_model(model_path, model_class, device)
+        import fns.pytorchcustom.field2PTW_model_definition as field2PTW_model
+        model = field2PTW_model.field2PTW(img_size = (1, 1700, 500),
+                                            size_threshold = (8, 8),
+                                            kernel = 5,
+                                            features = 12, 
+                                            interp_depth = 12,
+                                            conv_onlyweights = False,
+                                            batchnorm_onlybias = False,
+                                            act_layer = torch.nn.GELU,
+                                            hidden_features = 20)
 
         ## Prints
         if PRINT_LAYERS: pytc.prints.print_layers(model)
@@ -313,7 +320,7 @@ if __name__ == '__main__':
 
         ## Getting Size Information
         ft_y, ft_x = in_y, in_x
-        ft_n = model.Nfilters
+        ft_n = model.features
 
         ## Make Extractor 
         extractor = ftex.create_feature_extractor(model, return_nodes={lay: lay})
@@ -377,9 +384,10 @@ if __name__ == '__main__':
         ft_stds[:, :, n] = np.nanstd(ft_tensor[:,:,:,n], axis=0)
 
     ## Saving the Avgerage and Standard Deivation
+    lay = lay.replace('.', '_')
     if fixed_key=='None': fixed_key=''
-    fns.save.features2npz(ft_avgs, save_path=fig_path+lay+'_all_features_avg_'+fixed_key, ft_suffix='_avg')
-    fns.save.features2npz(ft_stds, save_path=fig_path+lay+'_all_features_std_'+fixed_key, ft_suffix='_std')
+    fns.save.features2npz(ft_avgs, save_path=os.path.join(fig_path, lay+'_all_features_avg_'+fixed_key), ft_suffix='_avg')
+    fns.save.features2npz(ft_stds, save_path=os.path.join(fig_path, lay+'_all_features_std_'+fixed_key), ft_suffix='_std')
 
     print('Feature averages & standard deivaitons computed and saved sucessfully.')
 
@@ -403,9 +411,9 @@ if __name__ == '__main__':
 
         fig.colorbar(im, ax=axs, label='Activation Intensity')
         plt.clim(avg_lims)
-        fig.suptitle('Average Features\nFrom '+lay+' for '+fixed_key)
+        fig.suptitle('Average Features\nFrom '+lay+' \nfor '+fixed_key)
 
-        fig.savefig(fig_path+lay+'_all_features_avg_'+fixed_key+'.png')
+        fig.savefig(os.path.join(fig_path, lay+'_all_features_avg_'+fixed_key+'.png'))
         plt.close()
 
         ## Plotting the Standard Deviation
@@ -418,9 +426,9 @@ if __name__ == '__main__':
 
         fig.colorbar(im, ax=axs, label='Activation Intensity')
         plt.clim(std_lims)
-        fig.suptitle('Standard Deviation of\nFeatures from '+lay+' for '+fixed_key)
+        fig.suptitle('Standard Deviation of\nFeatures from '+lay+'\nfor '+fixed_key)
 
-        fig.savefig(fig_path+lay+'_all_features_std_'+fixed_key+'.png')
+        fig.savefig(os.path.join(fig_path, lay+'_all_features_std_'+fixed_key+'.png'))
         plt.close()
 
 
@@ -436,7 +444,7 @@ if __name__ == '__main__':
             fig.colorbar(im, label='Activation Intensity')
             plt.clim(avg_lims)
             
-            fig.savefig(fig_path+lay+'_feature'+str(i+1)+'_avg_'+fixed_key+'.png')
+            fig.savefig(os.path.join(fig_path, lay+'_feature'+str(i+1)+'_avg_'+fixed_key+'.png'))
             plt.close()
 
             ## Plotting the Standard Deviation
@@ -447,7 +455,7 @@ if __name__ == '__main__':
             fig.colorbar(im, label='Activation Intensity')
             plt.clim(std_lims)
             
-            fig.savefig(fig_path+lay+'_feature'+str(i+1)+'_std_'+fixed_key+'.png')
+            fig.savefig(os.path.join(fig_path, lay+'_feature'+str(i+1)+'_std_'+fixed_key+'.png'))
             plt.close()
 
 
@@ -464,7 +472,7 @@ if __name__ == '__main__':
             fig.colorbar(im, label='Activation Intensity')
             plt.clim(avg_lims)
             
-            fig.savefig(fig_path+lay+'_feature'+str(i+1)+'_avg_'+fixed_key+'.png')
+            fig.savefig(os.path.join(fig_path, lay+'_feature'+str(i+1)+'_avg_'+fixed_key+'.png'))
             plt.close()
 
             ## Plotting the Standard Deviation
@@ -475,7 +483,7 @@ if __name__ == '__main__':
             fig.colorbar(im, label='Activation Intensity')
             plt.clim(std_lims)
             
-            fig.savefig(fig_path+lay+'_feature'+str(i+1)+'_std_'+fixed_key+'.png')
+            fig.savefig(os.path.join(fig_path, lay+'_feature'+str(i+1)+'_std_'+fixed_key+'.png'))
             plt.close()
 
     print('Plots generated and saved.')

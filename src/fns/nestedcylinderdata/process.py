@@ -32,8 +32,6 @@ def listkeys(sample_list: list[str]):
 	## Seperate out keys
 	all_ptws = [i.split('_')[2] for i in sample_list]
 	unq_ptws = np.unique(all_ptws)
-	ptw_prefix = ['sclPTW_'] * np.size(unq_ptws)
-	unq_ptws = np.core.defchararray.add(ptw_prefix, unq_ptws)
 
 	all_idxs = [i.split('_')[-1].split('.')[0] for i in sample_list]
 	unq_idxs = np.unique(all_idxs)
