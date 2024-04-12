@@ -16,7 +16,7 @@ For each metric, generates a matrix for the:
 Fixed key (``-XK``) specifies what subset of data to consider
  - 'None' can be passed to consider any input with no restrictions
  - For coupon data, fixed keys must be in the form 'tpl###' or 'idx#####'
- - For nested cylinder data, fixed keys must be in the form 'sclPTW_###' or 'idx#####'
+ - For nested cylinder data, fixed keys must be in the form 'id####' or 'idx#####'
 
 Exports correlation coeffients as a pandas-readable .csv
 
@@ -27,7 +27,7 @@ Input Line for TF Coupon Models:
 ``python feature_pred_corr.py -P tensorflow -E coupon -M ../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -ID ../examples/tf_coupon/data/ -DF ../examples/tf_coupon/coupon_design_file.csv -L activation_15 -T All -NR 2 -S ../examples/tf_coupon/figures/``
 
 Input Line for PYT Nested Cylinder Models:
-``COMING SOON``
+``python feature_pred_corr.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.path -IF rho -ID ../examples/pyt_nestedcyl/data/ -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T All -NR 2 -S ../examples/pyt_nestedcyl/figures/``
 """
 
 #############################
@@ -141,13 +141,12 @@ if __name__ == '__main__':
         import fns.coupondata as cp
         prefix = 'cp.'
         import fns.coupondata.prints as cpprints
-        search_dir = input_dir+'r*tpl*idx*.npz'
+        search_dir = os.path.join(input_dir, 'r*tpl*idx*.npz')
     elif EXP == 'nestedcylinder':
-        raise NotImplementedError('Nested cylinder examples not included in open source.')
         import fns.nestedcylinderdata as nc
         prefix = 'nc.'
         import fns.nestedcylinderdata.prints as ncprints
-        search_dir = input_dir+'ncyl_sclPTW*idx*.npz'
+        search_dir = os.path.join(input_dir, 'nc231213*pvi*.npz')
 
     ## Create the File list
     if file_list_path != 'MAKE':
@@ -176,7 +175,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'r*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'r*'+fixed_key+'*.npz')
 
         elif EXP == 'nestedcylinder':
             ## Prints Keys
@@ -190,7 +189,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'ncyl*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'nc231213*'+fixed_key+'*.npz')
 
         ## Check Fixed Key
         setup.data_checks.check_key(fixed_key, search_dir)
@@ -205,7 +204,7 @@ if __name__ == '__main__':
         
         ## Make File List
         if fixed_key=='None': fixed_key=''
-        file_path = fig_path+'featurepredcorr_'+fixed_key
+        file_path = os.path.join(fig_path, 'featurepredcorr_'+fixed_key)
         num_samples, sample_list = fns.save.makefilelist(search_dir, num_samples=num_samples, save_path=file_path, save=True)
         # END if file_list_path=='MAKE'
 
@@ -304,8 +303,16 @@ if __name__ == '__main__':
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         ## Load Model
-        model_class = 'NCylANN_V1'
-        model = pytc.fts.load_model(model_path, model_class, device)
+        import fns.pytorchcustom.field2PTW_model_definition as field2PTW_model
+        model = field2PTW_model.field2PTW(img_size = (1, 1700, 500),
+                                            size_threshold = (8, 8),
+                                            kernel = 5,
+                                            features = 12, 
+                                            interp_depth = 12,
+                                            conv_onlyweights = False,
+                                            batchnorm_onlybias = False,
+                                            act_layer = torch.nn.GELU,
+                                            hidden_features = 20)
         model.eval()
 
         ## Prints
@@ -386,6 +393,8 @@ if __name__ == '__main__':
 
     ## Convert the dataframe from containing objects to containing numerics
     for c in col_names: dataframe[c] = pd.to_numeric(dataframe[c])
+    print(dataframe['sclPTW'])
+    sys.exit()
 
     print('Features and predictions computed sucessfully.')
 
@@ -451,19 +460,19 @@ if __name__ == '__main__':
     df_pred_labels = np.concatenate((pred_names, ['Spacer', 'Abs. Row Avg.']))
 
     ## Saving the Standard Correlations
-    save_path = fig_path + 'ft_pred_corr_'+fixed_key
+    save_path = os.path.join(fig_path, 'ft_pred_corr_'+fixed_key)
     pd.DataFrame(data=corrs, index=df_ft_labels, columns=df_pred_labels).to_csv(save_path+'.csv')
     pd.DataFrame(data=pvals, index=ft_labels, columns=pred_names).to_csv(save_path+'_pvals.csv')
     pd.DataFrame(data=statsig_corrs, index=ft_labels, columns=pred_names).to_csv(save_path+'_statsig.csv')
 
     ## Saving the Partial Correlations
-    save_path = fig_path + 'ft_pred_partialcorr_'+fixed_key
+    save_path = os.path.join(fig_path, 'ft_pred_partialcorr_'+fixed_key)
     pd.DataFrame(data=partial_corrs, index=df_ft_labels, columns=df_pred_labels).to_csv(save_path+'.csv')
     pd.DataFrame(data=partial_pvals, index=ft_labels, columns=pred_names).to_csv(save_path+'_pvals.csv')
     pd.DataFrame(data=statsig_partial_corrs, index=ft_labels, columns=pred_names).to_csv(save_path+'_statsig.csv')
 
     ## Saving the Partial Correlations
-    save_path = fig_path + 'ft_pred_partialrankcorr_'+fixed_key
+    save_path = os.path.join(fig_path, 'ft_pred_partialrankcorr_'+fixed_key)
     pd.DataFrame(data=partial_rank_corrs, index=df_ft_labels, columns=df_pred_labels).to_csv(save_path+'.csv')
     pd.DataFrame(data=partial_rank_pvals, index=ft_labels, columns=pred_names).to_csv(save_path+'_pvals.csv')
     pd.DataFrame(data=statsig_partial_rank_corrs, index=ft_labels, columns=pred_names).to_csv(save_path+'_statsig.csv')
@@ -477,39 +486,39 @@ if __name__ == '__main__':
     ylabel = 'Norm of Features from Selected Layer'
 
     ## Standard Correlation
-    save_path = fig_path + 'ft_pred_corr_'+fixed_key
+    save_path = os.path.join(fig_path, 'ft_pred_corr_'+fixed_key)
     ## Correlation
-    title = 'Correlation of \nFeatures '+str(norm)+' Norm from '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
+    title = 'Correlation of \nFeatures '+str(norm)+' Norm\nfrom '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
     fns.plot.heatmap_plot(corrs, xticklabels=pred_labels_long, yticklabels=ft_labels_long, xlabel=xlabel, ylabel=ylabel, title=title, save_path=save_path)
     ## P-Values
-    title = 'Correlation P-Vals of \nFeatures '+str(norm)+' Norm from '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
+    title = 'Correlation P-Vals of \nFeatures '+str(norm)+' Norm\nfrom '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
     fns.plot.heatmap_plot(pvals, xticklabels=pred_labels, yticklabels=ft_labels, xlabel=xlabel, ylabel=ylabel, title=title, save_path=save_path+'_pvals')
     ## Statistically Significant Correlations
-    title = 'Stat. Significant Correlation of \nFeatures '+str(norm)+' Norm from '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
+    title = 'Stat. Significant Correlation of \nFeatures '+str(norm)+' Norm\nfrom '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
     fns.plot.heatmap_plot(statsig_corrs, xticklabels=pred_labels, yticklabels=ft_labels, xlabel=xlabel, ylabel=ylabel, title=title, save_path=save_path+'_statsig')
 
     ## Partial Correlation
-    save_path = fig_path + 'ft_pred_partialcorr_'+fixed_key
+    save_path = os.path.join(fig_path, 'ft_pred_partialcorr_'+fixed_key)
     ## Correlation
-    title = 'Partial Corr. of \nFeatures '+str(norm)+' Norm from '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
+    title = 'Partial Corr. of \nFeatures '+str(norm)+' Norm\nfrom '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
     fns.plot.heatmap_plot(partial_corrs, xticklabels=pred_labels_long, yticklabels=ft_labels_long, xlabel=xlabel, ylabel=ylabel, title=title, save_path=save_path)
     ## P-Values
-    title = 'Partial Corr. P-Vals of \nFeatures '+str(norm)+' Norm from '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
+    title = 'Partial Corr. P-Vals of \nFeatures '+str(norm)+' Norm\nfrom '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
     fns.plot.heatmap_plot(partial_pvals, xticklabels=pred_labels, yticklabels=ft_labels, xlabel=xlabel, ylabel=ylabel, title=title, save_path=save_path+'_pvals')
     ## Statistically Significant Correlations
-    title = 'Stat. Significant Partial Corr. of \nFeatures '+str(norm)+' Norm from '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
+    title = 'Stat. Significant Partial Corr. of \nFeatures '+str(norm)+' Norm\nfrom '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
     fns.plot.heatmap_plot(statsig_partial_corrs, xticklabels=pred_labels, yticklabels=ft_labels, xlabel=xlabel, ylabel=ylabel, title=title, save_path=save_path+'_statsig')
 
     ## Partial Rank Correlation
-    save_path = fig_path + 'ft_pred_partialrankcorr_'+fixed_key
+    save_path = os.path.join(fig_path, 'ft_pred_partialrankcorr_'+fixed_key)
     ## Correlation
-    title = 'Partial Rank Corr. of \nFeatures '+str(norm)+' Norm from '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
+    title = 'Partial Rank Corr. of \nFeatures '+str(norm)+' Norm\nfrom '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
     fns.plot.heatmap_plot(partial_rank_corrs, xticklabels=pred_labels_long, yticklabels=ft_labels_long, xlabel=xlabel, ylabel=ylabel, title=title, save_path=save_path)
     ## P-Values
-    title = 'Partial Rank Corr. P-Vals of \nFeatures '+str(norm)+' Norm from '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
+    title = 'Partial Rank Corr. P-Vals of \nFeatures '+str(norm)+' Norm\nfrom '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
     fns.plot.heatmap_plot(partial_rank_pvals, xticklabels=pred_labels, yticklabels=ft_labels, xlabel=xlabel, ylabel=ylabel, title=title, save_path=save_path+'_pvals')
     ## Statistically Significant Correlations
-    title = 'Stat. Significant Partial Rank Corr. of \nFeatures '+str(norm)+' Norm from '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
+    title = 'Stat. Significant Partial Rank Corr. of \nFeatures '+str(norm)+' Norm\nfrom '+lay+'\nwith Model Predictions\nover '+str(num_samples)+' '+fixed_key+' Sample(s)'
     fns.plot.heatmap_plot(statsig_partial_rank_corrs, xticklabels=pred_labels, yticklabels=ft_labels, xlabel=xlabel, ylabel=ylabel, title=title, save_path=save_path+'_statsig')
 
     print('Plots generated and saved.')
