@@ -7,7 +7,7 @@ Generates a matrix of the scalar 2D cross-correlation-coefficient between select
 Fixed key (``-XK``) specifies what subset of data to consider
  - 'None' can be passed to consider any input with no restrictions
  - For coupon data, fixed keys must be in the form 'tpl###' or 'idx#####'
- - For nested cylinder data, fixed keys must be in the form 'sclPTW_###' or 'idx#####'
+ - For nested cylinder data, fixed keys must be in the form 'id####' or 'idx#####'
 
 Exports correlation coeffients as a pandas-readable .csv
 
@@ -18,7 +18,7 @@ Input Line for TF Coupon Models:
 ``python feature_fieldstd_corr.py -P tensorflow -E coupon -M ../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -ID ../examples/tf_coupon/data/ -DF ../examples/tf_coupon/coupon_design_file.csv -L activation_15 -T All -NM ft01 -F All -S ../examples/tf_coupon/figures/``
 
 Input Line for PYT Nested Cylinder Models:
-``COMING SOON``
+``python feature_fieldstd_corr.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.path -IF rho -ID ../examples/pyt_nestedcyl/data/ -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T All -NM ft01 -F All -S ../examples/pyt_nestedcyl/figures/``
 """
 
 #############################
@@ -135,13 +135,12 @@ if __name__ == '__main__':
         import fns.coupondata as cp
         prefix = 'cp.'
         import fns.coupondata.prints as cpprints
-        search_dir = input_dir+'r*tpl*idx*.npz'
+        search_dir = os.path.join(input_dir, 'r*tpl*idx*.npz')
     elif EXP == 'nestedcylinder':
-        raise NotImplementedError('Nested cylinder examples not included in open source.')
         import fns.nestedcylinderdata as nc
         prefix = 'nc.'
         import fns.nestedcylinderdata.prints as ncprints
-        search_dir = input_dir+'ncyl_sclPTW*idx*.npz'
+        search_dir = os.path.join(input_dir, 'nc231213*pvi*.npz')
 
     ## Create the File list for samples to become features
     if file_list_path != 'MAKE':
@@ -151,12 +150,12 @@ if __name__ == '__main__':
         if EXP == 'coupon':
             fixed_key = cp.process.findkey(sample_list_ft)
             if fixed_key != 'None':
-                search_dir = input_dir+'r*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'r*'+fixed_key+'*.npz')
 
         if EXP == 'nestedcylinder':
             fixed_key = nc.process.findkey(sample_list_ft)
             if fixed_key != 'None':
-                search_dir = input_dir+'ncyl*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'nc231213*'+fixed_key+'*.npz')
 
         ## Prints
         if PRINT_KEYS: print('Key present in '+file_list_path+' is '+fixed_key)
@@ -177,7 +176,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'r*'+fixed_key+'*.npz'
+                search_dir = os.path.join(input_dir, 'r*'+fixed_key+'*.npz')
 
         elif EXP == 'nestedcylinder':
             ## Prints Keys
@@ -191,7 +190,7 @@ if __name__ == '__main__':
 
             ## Set Fixed Key
             if fixed_key != 'None':
-                search_dir = input_dir+'ncyl*'+fixed_key+'*.npz'
+                search_dir = search_dir = os.path.join(input_dir, 'nc231213*'+fixed_key+'*.npz')
 
         ## Check Fixed Key
         setup.data_checks.check_key(fixed_key, search_dir)
@@ -206,7 +205,7 @@ if __name__ == '__main__':
         
         ## Make File List
         if fixed_key=='None': fixed_key=''
-        file_path_ft = fig_path+'ftsamples_featurefieldstdcorr_'+fixed_key
+        file_path_ft = os.path.join(fig_path, 'ftsamples_featurefieldstdcorr_'+fixed_key)
         num_samples_ft, sample_list_ft = fns.save.makefilelist(search_dir, num_samples=num_samples, save_path=file_path_ft, save=True)
         # END if file_list_path=='MAKE'
 
@@ -225,10 +224,10 @@ if __name__ == '__main__':
         except:
             print('\n')
             warnings.warn('Less than '+threshold+' samples are available to compute the standard deviations of the fields. The standard deviations of the fields may not be representative.\n')
-            file_path_fld = fig_path+'fldsamples_featurefieldstdcorr_'+fixed_key
+            file_path_fld = os.path.join(fig_path, 'fldsamples_featurefieldstdcorr_'+fixed_key)
             num_samples_fld, sample_list_fld = fns.save.makefilelist(search_dir, num_samples='All', save_path=file_path_fld, save=True)
         else:
-            file_path_fld = fig_path+'fldsamples_featurefieldstdcorr_'+fixed_key
+            file_path_fld = os.path.join(fig_path, 'fldsamples_featurefieldstdcorr_'+fixed_key)
             num_samples_fld, sample_list_fld = fns.save.makefilelist(search_dir, num_samples=threshold, save_path=file_path_fld, save=True)
 
 
@@ -311,7 +310,7 @@ if __name__ == '__main__':
         fld_stds[:, :, n] = np.nanstd(field_tensor[:, n, :, :], axis=0)
 
     ## Saving the Field Standard Deivation
-    file_path = fig_path+'fldstds_featurefieldstdcorr_'
+    file_path = os.path.join(fig_path, 'fldstds_featurefieldstdcorr_')
     fns.save.fields2npz(fld_stds, fields, save_path=file_path+fixed_key, suffix='_std')
 
     print('Field standard deivaitons computed and saved sucessfully.')
@@ -355,8 +354,16 @@ if __name__ == '__main__':
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         ## Load Model
-        model_class = 'NCylANN_V1'
-        model = pytc.fts.load_model(model_path, model_class, device)
+        import fns.pytorchcustom.field2PTW_model_definition as field2PTW_model
+        model = field2PTW_model.field2PTW(img_size = (1, 1700, 500),
+                                            size_threshold = (8, 8),
+                                            kernel = 5,
+                                            features = 12, 
+                                            interp_depth = 12,
+                                            conv_onlyweights = False,
+                                            batchnorm_onlybias = False,
+                                            act_layer = torch.nn.GELU,
+                                            hidden_features = 20)
 
         ## Prints
         if PRINT_LAYERS: pytc.prints.print_layers(model)
@@ -434,7 +441,7 @@ if __name__ == '__main__':
     avg_corr[0,-1] = 0 #zero out the top right corner
 
     ## Save the correlations
-    file_path = fig_path+'featurefieldstdcorr_'+fixed_key
+    file_path = os.path.join(fig_path, 'featurefieldstdcorr_'+fixed_key)
     features1 = features+1
     df_ft_labels = np.concatenate((['Abs. Col. Avg.', 'Spacer'], features1.astype(str)))
     df_fld_labels = np.concatenate((fields, ['Spacer', 'Abs. Row Avg.']))
