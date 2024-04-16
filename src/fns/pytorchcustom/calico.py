@@ -86,7 +86,7 @@ def check_calico_features(model, features: str):
 		raise ValueError('The calico network requires that only one feature be selected.\nUse -PT or --PRINT_FEATURES to show how mnay features are extracted from the given layer.')
 	else:
 		ft = features[0]
-		n_fts = model.Nfilters
+		n_fts = model.features
 		if not ft.isdigit():
 			raise ValueError('Feature given is not an integer.')
 		elif int(ft) > n_fts:
@@ -108,17 +108,25 @@ def eval_layer(model, lay: str, x: typing.Union[torch.FloatTensor, torch.cuda.Fl
 	"""
 	## Evaluate layer in a ModuleList
 	if '.' in lay:
-		name = lay.split('.')[0]
-		number = int(lay.split('.')[-1])
-		x = getattr(model, name)[number](x)
+		split_name = lay.split('.')
+		if split_name[-1].isdigit():
+			number = int(split_name[-1])
+			new_layer_name = '_'.join(split_name[0:-1])
+			x = getattr(model, new_layer_name)[number](x)
+		else:
+			new_layer_name = '_'.join(split_name)
+			x = getattr(model, new_layer_name)(x)
 
 	## Evaluate predefined torch layer
-	elif lay == 'flatten':
-		x = x.flatten()
+	elif 'flatten' in lay:
+		#print('flatten')
+		x = x.flatten(start_dim=1)
 
 	## Evaluate custom layer
 	else:
+		#print(lay)
 		x = getattr(model, lay)(x)
+		#print(x.shape)
 
 	return x
 

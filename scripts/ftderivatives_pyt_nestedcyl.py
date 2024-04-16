@@ -11,7 +11,7 @@ Exports derivatives and other sample information as a pandas-readable .csv, incl
  - Truth PTW scaling corresponding to the input sample, and identifying sample information
 
 Input Line:
-``COMING SOON``
+``python ftderivatives_pyt_nestedcyl.py -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.pth -IF rho -ID ../examples/pyt_nestedcyl/data/ -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T 1 -S ../examples/pyt_nestedcyl/figures/``
 """
 
 #############################
@@ -84,8 +84,6 @@ parser = feature_derivatives_parser()
 ## Executable
 #############################
 if __name__ == '__main__':
-
-	raise NotImplementedError('Nested cylinder examples not included in open source.')
 	
 	args = parser.parse_args()
 
@@ -120,7 +118,7 @@ if __name__ == '__main__':
 	#############################
 	import fns.nestedcylinderdata as nc
 	import fns.nestedcylinderdata.prints as ncprints
-	search_dir = input_dir+'ncyl_sclPTW*idx*.npz'
+	search_dir = os.path.join(input_dir, 'nc231213*pvi*.npz')
 
 	## Create the File list 
 	if file_list_path != 'MAKE':
@@ -148,7 +146,7 @@ if __name__ == '__main__':
 
 		## Set Fixed Key
 		if fixed_key != 'None':
-			search_dir = input_dir+'ncyl*'+fixed_key+'*.npz'
+			search_dir = os.path.join(input_dir, 'nc231213*'+fixed_key+'*.npz')
 
 		## Check Fixed Key
 		setup.data_checks.check_key(fixed_key, search_dir)
@@ -162,7 +160,7 @@ if __name__ == '__main__':
 		setup.data_checks.check_samples(num_samples, search_dir)
 
 		## Make File List
-		file_path = fig_path+'feature_derivatives'
+		file_path = os.path.join(fig_path, 'feature_derivatives')
 		num_samples, sample_list = fns.save.makefilelist(search_dir, num_samples=num_samples, save_path=file_path, save=True)
 		file_list_path = file_path + '_SAMPLES.txt'
 
@@ -191,8 +189,18 @@ if __name__ == '__main__':
     ## Model Processing
     #############################
 	## Load Model
-	model_class = 'NCylANN_V1'
-	model = pytc.fts.load_model(model_path, model_class, device)
+	import fns.pytorchcustom.field2PTW_model_definition as field2PTW_model
+	model = field2PTW_model.field2PTW(img_size = (1, 1700, 500),
+										size_threshold = (8, 8),
+										kernel = 5,
+										features = 12, 
+										interp_depth = 12,
+										conv_onlyweights = True,
+										batchnorm_onlybias = False,
+										act_layer = torch.nn.GELU,
+										hidden_features = 20)
+	checkpoint = torch.load(model_path, map_location=device)
+	model.load_state_dict(checkpoint["modelState"])
 
 	## Prints
 	if PRINT_LAYERS: pytc.prints.print_layers(model)
@@ -242,8 +250,8 @@ if __name__ == '__main__':
 			sample_out[i*8 : (i+1)*8, :] = np.transpose(sampleID)
 
 			(splitx, diff) = calico(img_input)
-			pred_out[i*8 : (i+1)*8, 0] = splitx
-			diff_out[i*8 : (i+1)*8, 0] = diff
+			pred_out[i*8 : (i+1)*8, 0] = splitx.flatten()
+			diff_out[i*8 : (i+1)*8, 0] = diff.flatten()
 
 	print('Predictions Created Sucessfully\n')
 
@@ -261,7 +269,8 @@ if __name__ == '__main__':
 	header = ['difference', 'derivative', 'prediction', 'truth', 'ptw', 'idx']
 
 	## Save Results to a DataFrame
-	fileprefix = fig_path+lay+'_ft'+str(ft+1)+'_dScale'+str(dScale).replace('.', '_')
+	lay = lay.replace('.', '_')
+	fileprefix = os.path.join(fig_path, lay+'_ft'+str(ft+1)+'_dScale'+str(dScale).replace('.', '_'))
 	df = pd.DataFrame(out_concat, columns = header)
 	df.to_csv(fileprefix+'_derivative_DF_long.csv')
 	cleandf = df.drop_duplicates().reset_index().iloc[:,1:]

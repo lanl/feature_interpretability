@@ -4,10 +4,6 @@ Derivatives on Pytorch Nested Cylinder Models
 
 Feature dervivatives have been implemented on the :doc:`/exp/pytnestedcyl/`.
 
-.. attention::
-   
-   Nested cylinder examples are not currently included in the open source edition of this code. As such, when a script is passed ``--EXPERIMENT nestedcylinder``, it raises a ``NotImplementedError``. Nested cylinder examples are expected to be added in February 2024.
-
 .. contents:: Table of Contents:
 	:local:
 	:depth: 2 

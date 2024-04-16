@@ -5,7 +5,7 @@ Defines the calico model for the single branch pytorch nested cylinder models
 Execution will print unit test information, perform unit tests, and print the results to the terminal.
 
 Input Line:
-``COMING SOON``
+``python pyt_nestedcyl_calico_model.py -M ../../../examples/pyt_nestedcyl/trained_rho2PTW_model.pth -IF rho -IN ../../../examples/pyt_nestedcyl/data/nc231213_Sn_id0643_pvi_idx00112.npz -DF ../../../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10``
 """
 
 #############################
@@ -29,6 +29,27 @@ import fns.setup as setup
 import fns.nestedcylinderdata as nc
 import fns.pytorchcustom as pytc
 import fns.pytorchcustom.calico as pytcalico
+
+#############################
+## Recurrsive Get Attribute
+#############################
+def recurr_getattr(obj, attr: str, default=None):
+	""" Recursive getattr function; allowes 'attr' to contain '.'
+
+		| Taken from: https://programanddesign.com/python-2/recursive-getsethas-attr/
+
+		Args:
+			obj (object)
+			attr (str): attribute to obtain; can contain '.', which would be a recurrsive attribute
+			default: value that is returned when the named attribute is not found
+
+		Returns:
+			Attribute of Object
+
+	"""
+	try: left, right = attr.split('.', 1)
+	except: return getattr(obj, attr, default)
+	return recurr_getattr(getattr(obj, left), right, default)
 
 #############################
 ## Create Calico Model
@@ -62,13 +83,17 @@ class make_calico(nn.Module):
 		for layer in self.oldlayers:
 			## Copy layers in ModuleLists
 			if '.' in layer:
-				name = layer.split('.')[0]
-				number = int(layer.split('.')[-1])
-
-				if number == 0: #If it's the first layer in a ModuleList, define a ModuleList
-					setattr(self, name, nn.ModuleList())
-
-				getattr(self, name).append(copy.deepcopy(getattr(model, name)[number]))
+				split_name = layer.split('.')
+				if split_name[-1].isdigit():
+					number = int(split_name[-1])
+					old_layer_name = '.'.join(split_name[0:-1])
+					new_layer_name = '_'.join(split_name[0:-1])
+					if number == 0: #If it's the first layer in a ModuleList, define a ModuleList
+						setattr(self, new_layer_name, nn.ModuleList())
+					getattr(self, new_layer_name).append(copy.deepcopy(recurr_getattr(model, old_layer_name)[number]))
+				else:
+					new_layer_name = '_'.join(split_name)
+					setattr(self, new_layer_name, copy.deepcopy(recurr_getattr(model, layer)))
 
 			## Skip layers that are predefined in pytorch
 			elif layer == 'flatten': #skip flatten layer in the init
@@ -76,9 +101,9 @@ class make_calico(nn.Module):
 
 			## Copy custom layers
 			else:
-				setattr(self, layer, copy.deepcopy(getattr(model, layer)))
-                
-            
+				setattr(self, layer, copy.deepcopy(recurr_getattr(model, layer)))
+				
+			
 	def forward(self, x: typing.Union[torch.FloatTensor, torch.cuda.FloatTensor]):
 		""" Forward pass of pytorch neural network class
 
@@ -148,8 +173,8 @@ def calico_model_parser():
 	descript_str = 'Creates and tests a calcio network given an input model'
 
 	parser = argparse.ArgumentParser(prog='Calico Functions',
-			                         description=descript_str,
-			                         fromfile_prefix_chars='@')
+									 description=descript_str,
+									 fromfile_prefix_chars='@')
 	## Model Imports
 	setup.args.model(parser) # -M
 	setup.args.input_field(parser) # -IF
@@ -171,8 +196,6 @@ parser = calico_model_parser()
 ## Unit Tests for Calico Network
 #############################
 if __name__ == '__main__':
-
-	raise NotImplementedError('Nested cylinder examples not included in open source.')
 
 	## Parse Args
 	args = parser.parse_args()
@@ -208,8 +231,18 @@ if __name__ == '__main__':
 	## Model Processing
 	#############################
 	## Load Model
-	model_class = 'NCylANN_V1'
-	model = pytc.fts.load_model(model_path, model_class, device)
+	import fns.pytorchcustom.field2PTW_model_definition as field2PTW_model
+	model = field2PTW_model.field2PTW(img_size = (1, 1700, 500),
+											size_threshold = (8, 8),
+											kernel = 5,
+											features = 12, 
+											interp_depth = 12,
+											conv_onlyweights = True,
+											batchnorm_onlybias = False,
+											act_layer = torch.nn.GELU,
+											hidden_features = 20)
+	checkpoint = torch.load(model_path, map_location=device)
+	model.load_state_dict(checkpoint["modelState"])
 
 	## Model Prints
 	if PRINT_LAYERS: 

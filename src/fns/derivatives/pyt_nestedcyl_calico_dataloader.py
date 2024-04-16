@@ -5,7 +5,7 @@ Defines the pytorch dataset class for the single branch pytorch nested cylinder 
 Execution will print test information, perform tests, and print the results to the terminal.
 
 Input Line:
-``COMING SOON``
+``python pyt_nestedcyl_calico_dataloader.py -M ../../../examples/pyt_nestedcyl/trained_rho2PTW_model.pth -IF rho -ID ../../../examples/pyt_nestedcyl/data/ -DF ../../../examples/pyt_nestedcyl/nestedcyl_design_file.csv``
 """
 
 #############################
@@ -45,10 +45,10 @@ class calico_DataSet(Dataset):
 	"""
 
 	def __init__(self,
-					input_field: str='hr_MOICyl',
-					input_dir: str='/data/nested_cyl_230428/',
-					filelist: str='../../coupon_ml/yellow_r60um_tpl_testing.txt',
-			        design_file: str='/data/nested_cyl_230428//runsKey.csv'):
+					input_field: str='rho',
+					input_dir: str='../examples/pyt_nestedcyl/data/',
+					filelist: str='filelist',
+			        design_file: str='../examples/pyt_nestedcyl/nestedcyl_design_file.csv'):
 
 		## Model Arguments 
 		self.input_field = input_field
@@ -76,7 +76,7 @@ class calico_DataSet(Dataset):
 
 		## Get index to design file from NPZ filename
 		key = nc.process.npz2key(filepath)
-		ptw = float(key.split('_')[-1])
+		ptw = nc.process.csv2scalePTW(self.design_file, key)
 		idx_long = nc.process.npz2idx(filepath)
 		idX = float(re.split('idx', idx_long)[-1])
 		sampleID = (ptw, idX)
@@ -94,10 +94,10 @@ class calico_DataSet(Dataset):
 
 		return (img_input, truth, sampleID)
 
-def calico_dataloader(input_field: str='hr_MOICyl',
-					input_dir: str='/data/nested_cyl_230428/',
-					filelist: str='../../coupon_ml/yellow_r60um_tpl_testing.txt',
-					design_file: str='/data/nested_cyl_230428//runsKey.csv',
+def calico_dataloader(input_field: str='rho',
+					input_dir: str='../examples/pyt_nestedcyl/data/',
+					filelist: str='filelist',
+					design_file: str='../examples/pyt_nestedcyl/nestedcyl_design_file.csv',
 					batch_size: int=8):
 		""" Function to create a pytorch dataloader from the pytorch nested cylinder calico model dataset
 
@@ -150,8 +150,6 @@ parser = calico_dataloader_parser()
 ## Unit Tests for Calico Sequence
 #############################
 if __name__ == '__main__':
-
-	raise NotImplementedError('Nested cylinder examples not included in open source.')
 	
 	## Parse Args
 	args = parser.parse_args()
@@ -173,12 +171,21 @@ if __name__ == '__main__':
 	num_samples = args.NUM_SAMPLES
 
 	## Load Model
-	model_class = 'NCylANN_V1'
-	sys.path.append(os.path.abspath('../../../../../syntheticnestedcyldata/'))
-	model = pytc.fts.load_model(model_path, model_class, device)
+	import fns.pytorchcustom.field2PTW_model_definition as field2PTW_model
+	model = field2PTW_model.field2PTW(img_size = (1, 1700, 500),
+											size_threshold = (8, 8),
+											kernel = 5,
+											features = 12, 
+											interp_depth = 12,
+											conv_onlyweights = True,
+											batchnorm_onlybias = False,
+											act_layer = torch.nn.GELU,
+											hidden_features = 20)
+	checkpoint = torch.load(model_path, map_location=device)
+	model.load_state_dict(checkpoint["modelState"])
 
 	## Get a Test File
-	search_dir = input_dir+'ncyl_sclPTW*idx*.npz'
+	search_dir = os.path.join(input_dir, 'nc231213*pvi*.npz')
 	test_path = glob.glob(search_dir)[0]
 	test_npz = np.load(test_path)
 

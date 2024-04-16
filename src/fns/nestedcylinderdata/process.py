@@ -72,7 +72,6 @@ def npz2key(npz_file: str):
     """
 	key = npz_file.split('/')[-1].split('_')
 	key = '_'.join(key[0:3])
-	key = '# '+key
 	return key
 
 def npz2idx(npz_file: str):
@@ -102,7 +101,7 @@ def csv2scalePTW(csv_file: str, key:str):
 			ptw (float): the PTW scaling value used to a given simulation
     """
 	design_df = pd.read_csv(csv_file,
-								sep=',',
+								sep=', ',
                             	header=0,
                             	index_col=0,
                             	engine='python')
