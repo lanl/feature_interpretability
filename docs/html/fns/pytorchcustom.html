@@ -128,25 +128,6 @@
 <span id="feature-processing-pytorchcustom-fts"></span><h2><a class="toc-backref" href="#id1">Feature Processing (pytorchcustom.fts)</a><a class="headerlink" href="#module-fns.pytorchcustom.fts" title="Permalink to this headline"></a></h2>
 <p>Contains functions to extract features from a pytorch neural network</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="fns.pytorchcustom.fts.load_model">
-<span class="sig-prename descclassname"><span class="pre">fns.pytorchcustom.fts.</span></span><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.pytorchcustom.fts.load_model" title="Permalink to this definition"></a></dt>
-<dd><p>Function to import a pytorch model from a saved checkpoint</p>
-<p>Does not load optimizer, meaning the loaded model cannot be trained further</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model_path</strong> (<em>str</em>) – path to saved pytorch model checkpoint</p></li>
-<li><p><strong>model</strong> (<em>initiated pytorch model</em>) – </p></li>
-<li><p><strong>device</strong> (<em>torch.device</em>) – device index to select</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>model</strong> (<em>loaded pytorch model</em>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="fns.pytorchcustom.fts.feature_extractor">
 <span class="sig-prename descclassname"><span class="pre">fns.pytorchcustom.fts.</span></span><span class="sig-name descname"><span class="pre">feature_extractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.pytorchcustom.fts.feature_extractor" title="Permalink to this definition"></a></dt>
 <dd><p>Function to extract the features from a given layer of a model</p>
