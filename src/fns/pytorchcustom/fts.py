@@ -14,29 +14,6 @@ import torchvision.models.feature_extraction as ftex
 
 import fns
 
-
-#############################
-## Load Pytorch Model
-#############################
-def load_model(model_path: str, model, device: torch.device):
-	""" Function to import a pytorch model from a saved checkpoint
-
-		Does not load optimizer, meaning the loaded model cannot be trained further
-
-		Args:
-			model_path (str): path to saved pytorch model checkpoint
-			model (initiated pytorch model) 
-			device (torch.device): device index to select
-
-		Returns:
-			model (loaded pytorch model)
-	"""
-	loadedCheckpoint = torch.load(model_path, map_location=device)
-	model.load_state_dict(loadedCheckpoint["modelState"])
-
-	return model
-
-
 #############################
 ## Extract Features
 #############################

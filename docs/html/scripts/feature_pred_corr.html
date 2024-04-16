@@ -124,7 +124,7 @@
 <summary>Collapse Pytorch Nested Cylinder Figure</summary><div class="line-block">
 <div class="line"><br /></div>
 </div>
-<a class="reference internal image-reference" href="../_images/COMING_SOON1.png"><img alt="Statistically Significnat Correlations of L2 Norm of Nested Cylinder Features and Network Predictions" class="align-center" src="../_images/COMING_SOON1.png" style="width: 390.0px; height: 260.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/COMING_SOON.png"><img alt="Statistically Significnat Correlations of L2 Norm of Nested Cylinder Features and Network Predictions" class="align-center" src="../_images/COMING_SOON.png" style="width: 390.0px; height: 260.0px;" /></a>
 <p class="centered">
 <strong><em>Statistically Significnat Correlations of L2 Norm of Nested Cylinder Features and Network Predictions</em></strong></p></details><div class="line-block">
 <div class="line"><br /></div>
@@ -151,7 +151,7 @@
 <dt>Fixed key (<code class="docutils literal notranslate"><span class="pre">-XK</span></code>) specifies what subset of data to consider</dt><dd><ul class="simple">
 <li><p>‘None’ can be passed to consider any input with no restrictions</p></li>
 <li><p>For coupon data, fixed keys must be in the form ‘tpl###’ or ‘idx#####’</p></li>
-<li><p>For nested cylinder data, fixed keys must be in the form ‘sclPTW_###’ or ‘idx#####’</p></li>
+<li><p>For nested cylinder data, fixed keys must be in the form ‘id####’ or ‘idx#####’</p></li>
 </ul>
 </dd>
 </dl>
@@ -163,7 +163,7 @@
 <p>Input Line for TF Coupon Models:
 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">feature_pred_corr.py</span> <span class="pre">-P</span> <span class="pre">tensorflow</span> <span class="pre">-E</span> <span class="pre">coupon</span> <span class="pre">-M</span> <span class="pre">../examples/tf_coupon/trained_pRad2TePla_model.h5</span> <span class="pre">-IF</span> <span class="pre">pRad</span> <span class="pre">-ID</span> <span class="pre">../examples/tf_coupon/data/</span> <span class="pre">-DF</span> <span class="pre">../examples/tf_coupon/coupon_design_file.csv</span> <span class="pre">-L</span> <span class="pre">activation_15</span> <span class="pre">-T</span> <span class="pre">All</span> <span class="pre">-NR</span> <span class="pre">2</span> <span class="pre">-S</span> <span class="pre">../examples/tf_coupon/figures/</span></code></p>
 <p>Input Line for PYT Nested Cylinder Models:
-<code class="docutils literal notranslate"><span class="pre">COMING</span> <span class="pre">SOON</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">feature_pred_corr.py</span> <span class="pre">-P</span> <span class="pre">pytorch</span> <span class="pre">-E</span> <span class="pre">nestedcylinder</span> <span class="pre">-M</span> <span class="pre">../examples/pyt_nestedcyl/trained_rho2PTW_model.path</span> <span class="pre">-IF</span> <span class="pre">rho</span> <span class="pre">-ID</span> <span class="pre">../examples/pyt_nestedcyl/data/</span> <span class="pre">-DF</span> <span class="pre">../examples/pyt_nestedcyl/nestedcyl_design_file.csv</span> <span class="pre">-L</span> <span class="pre">interp_module.interpActivations.10</span> <span class="pre">-T</span> <span class="pre">All</span> <span class="pre">-NR</span> <span class="pre">2</span> <span class="pre">-S</span> <span class="pre">../examples/pyt_nestedcyl/figures/</span></code></p>
 </section>
 <section id="arguments">
 <h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
@@ -171,9 +171,10 @@
 </p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">python</span> <span class="n">feature_pred_corr</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PACKAGE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">EXPERIMENT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">MODEL</span><span class="p">]</span>
                                    <span class="p">[</span><span class="o">--</span><span class="n">INPUT_FIELD</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">INPUT_DIR</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">FILE_LIST</span><span class="p">]</span>
-                                   <span class="p">[</span><span class="o">--</span><span class="n">DESIGN_FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_LAYERS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_FEATURES</span><span class="p">]</span>
-                                   <span class="p">[</span><span class="o">--</span><span class="n">PRINT_FIELDS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_KEYS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_SAMPLES</span><span class="p">]</span>
-                                   <span class="p">[</span><span class="o">--</span><span class="n">LAYER</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">FEATURES</span>  <span class="p">[</span><span class="o">...</span><span class="p">]]</span> <span class="p">[</span><span class="o">--</span><span class="n">SCLR_NORM</span><span class="p">]</span>
+                                   <span class="p">[</span><span class="o">--</span><span class="n">DESIGN_FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_LAYERS</span><span class="p">]</span>
+                                   <span class="p">[</span><span class="o">--</span><span class="n">PRINT_FEATURES</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_FIELDS</span><span class="p">]</span>
+                                   <span class="p">[</span><span class="o">--</span><span class="n">PRINT_KEYS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">PRINT_SAMPLES</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">LAYER</span><span class="p">]</span>
+                                   <span class="p">[</span><span class="o">--</span><span class="n">FEATURES</span>  <span class="p">[</span><span class="o">...</span><span class="p">]]</span> <span class="p">[</span><span class="o">--</span><span class="n">SCLR_NORM</span><span class="p">]</span>
                                    <span class="p">[</span><span class="o">--</span><span class="n">FIXED_KEY</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">NUM_SAMPLES</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">SAVE_FIG</span><span class="p">]</span>
 </pre></div>
 </div>
