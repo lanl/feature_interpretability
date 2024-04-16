@@ -8,7 +8,7 @@ Input Line for TF Coupon Models:
 ``python feature_over_field.py -P tensorflow -E coupon -M ../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -IN ../examples/tf_coupon/data/r60um_tpl112_complete_idx00110.npz -DF ../examples/tf_coupon/coupon_design_file.csv -L activation_15 -T 1 2 3 4 -NM ft01 -F rho pRad eqps eqps_rate eff_stress -S ../examples/tf_coupon/figures/``
 
 Input Line for PYT Nested Cylinder Models:
-``python feature_over_field.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.path -IF rho -IN ../examples/pyt_nestedcyl/data/nc231213_Sn_id0643_pvi_idx00112.npz -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T 8 11 12 -F rho eqps eff_stress sound_speed -S ../examples/pyt_nestedcyl/figures/``
+``python feature_over_field.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.pth -IF rho -IN ../examples/pyt_nestedcyl/data/nc231213_Sn_id0643_pvi_idx00112.npz -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T 1 4 6 11 -F rho pressure bulk_mod -S ../examples/pyt_nestedcyl/figures/``
 """
 
 
@@ -215,10 +215,12 @@ if __name__ == '__main__':
                                             kernel = 5,
                                             features = 12, 
                                             interp_depth = 12,
-                                            conv_onlyweights = False,
+                                            conv_onlyweights = True,
                                             batchnorm_onlybias = False,
                                             act_layer = torch.nn.GELU,
                                             hidden_features = 20)
+        checkpoint = torch.load(model_path, map_location=device)
+        model.load_state_dict(checkpoint["modelState"])
 
         ## Prints
         if PRINT_LAYERS: pytc.prints.print_layers(model)
