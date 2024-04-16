@@ -18,7 +18,7 @@ Input Line for TF Coupon Models:
 ``python feature_fieldstd_corr.py -P tensorflow -E coupon -M ../examples/tf_coupon/trained_pRad2TePla_model.h5 -IF pRad -ID ../examples/tf_coupon/data/ -DF ../examples/tf_coupon/coupon_design_file.csv -L activation_15 -T All -NM ft01 -F All -S ../examples/tf_coupon/figures/``
 
 Input Line for PYT Nested Cylinder Models:
-``python feature_fieldstd_corr.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.path -IF rho -ID ../examples/pyt_nestedcyl/data/ -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T All -NM ft01 -F All -S ../examples/pyt_nestedcyl/figures/``
+``python feature_fieldstd_corr.py -P pytorch -E nestedcylinder -M ../examples/pyt_nestedcyl/trained_rho2PTW_model.pth -IF rho -ID ../examples/pyt_nestedcyl/data/ -DF ../examples/pyt_nestedcyl/nestedcyl_design_file.csv -L interp_module.interpActivations.10 -T All -NM ft01 -F All -S ../examples/pyt_nestedcyl/figures/``
 """
 
 #############################
@@ -360,10 +360,12 @@ if __name__ == '__main__':
                                             kernel = 5,
                                             features = 12, 
                                             interp_depth = 12,
-                                            conv_onlyweights = False,
+                                            conv_onlyweights = True,
                                             batchnorm_onlybias = False,
                                             act_layer = torch.nn.GELU,
                                             hidden_features = 20)
+        checkpoint = torch.load(model_path, map_location=device)
+        model.load_state_dict(checkpoint["modelState"])
 
         ## Prints
         if PRINT_LAYERS: pytc.prints.print_layers(model)
