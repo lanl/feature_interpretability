@@ -75,7 +75,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-fns.pytorchcustom.prints">Model Prints (pytorchcustom.prints)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-fns.pytorchcustom.checks">Model Checks (pytorchcustom.checks)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-fns.pytorchcustom.calico">Calico Functions (pytorchcustom.calico)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nested-cylinder-model-definition-pytorchcustom-ncylann-v1">Nested Cylinder Model Definition (pytorchcustom.NCylANN_V1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fns.pytorchcustom.field2PTW_model_definition">Nested Cylinder Model Definition (pytorchcustom.field2PTW_model_definition)</a></li>
 </ul>
 </li>
 </ul>
@@ -121,7 +121,7 @@
 <li><p><a class="reference internal" href="#module-fns.pytorchcustom.prints" id="id2">Model Prints (pytorchcustom.prints)</a></p></li>
 <li><p><a class="reference internal" href="#module-fns.pytorchcustom.checks" id="id3">Model Checks (pytorchcustom.checks)</a></p></li>
 <li><p><a class="reference internal" href="#module-fns.pytorchcustom.calico" id="id4">Calico Functions (pytorchcustom.calico)</a></p></li>
-<li><p><a class="reference internal" href="#nested-cylinder-model-definition-pytorchcustom-ncylann-v1" id="id5">Nested Cylinder Model Definition (pytorchcustom.NCylANN_V1)</a></p></li>
+<li><p><a class="reference internal" href="#module-fns.pytorchcustom.field2PTW_model_definition" id="id5">Nested Cylinder Model Definition (pytorchcustom.field2PTW_model_definition)</a></p></li>
 </ul>
 </div>
 <section id="module-fns.pytorchcustom.fts">
@@ -309,8 +309,144 @@ use ‘None’ if the model only has one branch</p></li>
 </dd></dl>
 
 </section>
-<section id="nested-cylinder-model-definition-pytorchcustom-ncylann-v1">
-<h2><a class="toc-backref" href="#id5">Nested Cylinder Model Definition (pytorchcustom.NCylANN_V1)</a><a class="headerlink" href="#nested-cylinder-model-definition-pytorchcustom-ncylann-v1" title="Permalink to this headline"></a></h2>
+<section id="module-fns.pytorchcustom.field2PTW_model_definition">
+<span id="nested-cylinder-model-definition-pytorchcustom-field2ptw-model-definition"></span><h2><a class="toc-backref" href="#id5">Nested Cylinder Model Definition (pytorchcustom.field2PTW_model_definition)</a><a class="headerlink" href="#module-fns.pytorchcustom.field2PTW_model_definition" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="fns.pytorchcustom.field2PTW_model_definition.conv2d_shape">
+<span class="sig-prename descclassname"><span class="pre">fns.pytorchcustom.field2PTW_model_definition.</span></span><span class="sig-name descname"><span class="pre">conv2d_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_h</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.pytorchcustom.field2PTW_model_definition.conv2d_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Function to calculate the new dimension of an image after a <code class="docutils literal notranslate"><span class="pre">nn.Conv2d</span></code></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Formula from: <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html">https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html</a></div>
+<div class="line">Assumes 2D input and dilation=1</div>
+</div>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>w</strong> (<em>int</em>) – starting width</p></li>
+<li><p><strong>h</strong> (<em>int</em>) – starting height</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – kernel size</p></li>
+<li><p><strong>s_w</strong> (<em>int</em>) – stride size along the width</p></li>
+<li><p><strong>s_h</strong> (<em>int</em>) – stride size along the height</p></li>
+<li><p><strong>p_w</strong> (<em>int</em>) – padding size along the width</p></li>
+<li><p><strong>p_h</strong> (<em>int</em>) – padding size along the height</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>new_w</strong> (<em>int</em>) – number of pixels along the width</p></li>
+<li><p><strong>new_h</strong> (<em>int</em>) – number of pixels along the height</p></li>
+<li><p><strong>total</strong> (<em>int</em>) – total number of pixels in new image</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fns.pytorchcustom.field2PTW_model_definition.CNN_Interpretability_Module">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fns.pytorchcustom.field2PTW_model_definition.</span></span><span class="sig-name descname"><span class="pre">CNN_Interpretability_Module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_size=(1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">1700</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">500)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel=5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features=12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth=12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_onlyweights=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchnorm_onlybias=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_layer=&lt;class</span> <span class="pre">'torch.nn.modules.activation.GELU'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.pytorchcustom.field2PTW_model_definition.CNN_Interpretability_Module" title="Permalink to this definition"></a></dt>
+<dd><p>Convolutional Neural Network Module that creates the “interpretability layers”</p>
+<p>Sequence of Conv2D, Batch Normalization, and Activation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_size</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em>) – size of input (channels, height, width)</p></li>
+<li><p><strong>kernel</strong> (<em>int</em>) – size of square convolutional kernel</p></li>
+<li><p><strong>features</strong> (<em>int</em>) – number of features in the convolutional layers</p></li>
+<li><p><strong>depth</strong> (<em>int</em>) – number of interpretability blocks</p></li>
+<li><p><strong>conv_onlyweights</strong> (<em>bool</em>) – determines if convolutional layers learn only weights or weights and bias</p></li>
+<li><p><strong>batchnorm_onlybias</strong> (<em>bool</em>) – determiens if the batch normalization layers learn only bias or weights and bias</p></li>
+<li><p><strong>act_layer</strong> (<em>nn.modules.activation</em>) – torch neural network layer class to use as activation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fns.pytorchcustom.field2PTW_model_definition.CNN_Interpretability_Module.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.pytorchcustom.field2PTW_model_definition.CNN_Interpretability_Module.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fns.pytorchcustom.field2PTW_model_definition.CNN_Reduction_Module">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fns.pytorchcustom.field2PTW_model_definition.</span></span><span class="sig-name descname"><span class="pre">CNN_Reduction_Module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_size=(1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">1700</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">500)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_threshold=(8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel=5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride=2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features=12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_onlyweights=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchnorm_onlybias=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_layer=&lt;class</span> <span class="pre">'torch.nn.modules.activation.GELU'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.pytorchcustom.field2PTW_model_definition.CNN_Reduction_Module" title="Permalink to this definition"></a></dt>
+<dd><p>Convolutional Neural Network Module that creates the “reduction layers”</p>
+<p>Sequence of Conv2D, Batch Normalization, and Activation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_size</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em>) – size of input (channels, height, width)</p></li>
+<li><p><strong>size_threshold</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – (approximate) size of final, reduced image (height, width)</p></li>
+<li><p><strong>kernel</strong> (<em>int</em>) – size of square convolutional kernel</p></li>
+<li><p><strong>stride</strong> (<em>int</em>) – size of base stride for convolutional kernel</p></li>
+<li><p><strong>features</strong> (<em>int</em>) – number of features in the convolutional layers</p></li>
+<li><p><strong>conv_onlyweights</strong> (<em>bool</em>) – determines if convolutional layers learn only weights or weights and bias</p></li>
+<li><p><strong>batchnorm_onlybias</strong> (<em>bool</em>) – determiens if the batch normalization layers learn only bias or weights and bias</p></li>
+<li><p><strong>act_layer</strong> (<em>nn.modules.activation</em>) – torch neural network layer class to use as activation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fns.pytorchcustom.field2PTW_model_definition.CNN_Reduction_Module.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.pytorchcustom.field2PTW_model_definition.CNN_Reduction_Module.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fns.pytorchcustom.field2PTW_model_definition.field2PTW">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fns.pytorchcustom.field2PTW_model_definition.</span></span><span class="sig-name descname"><span class="pre">field2PTW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_size=(1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">1700</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">500)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_threshold=(8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel=5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features=12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_depth=12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_onlyweights=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchnorm_onlybias=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_layer=&lt;class</span> <span class="pre">'torch.nn.modules.activation.GELU'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_features=20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.pytorchcustom.field2PTW_model_definition.field2PTW" title="Permalink to this definition"></a></dt>
+<dd><p>Convolutional Neural Network Model that uses a single PVI field to predict one scalar value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_size</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em>) – size of input (channels, height, width)</p></li>
+<li><p><strong>size_threshold</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – (approximate) size of reduced image (height, width)</p></li>
+<li><p><strong>kernel</strong> (<em>int</em>) – size of square convolutional kernel</p></li>
+<li><p><strong>features</strong> (<em>int</em>) – number of features in the convolutional layers</p></li>
+<li><p><strong>interp_depth</strong> (<em>int</em>) – number of interpretability blocks</p></li>
+<li><p><strong>conv_onlyweights</strong> (<em>bool</em>) – determines if convolutional layers learn only weights or weights and bias</p></li>
+<li><p><strong>batchnorm_onlybias</strong> (<em>bool</em>) – determiens if the batch normalization layers learn only bias or weights and bias</p></li>
+<li><p><strong>act_layer</strong> (<em>nn.modules.activation</em>) – torch neural network layer class to use as activation</p></li>
+<li><p><strong>hidden_features</strong> (<em>int</em>) – number of hidden features in the fully connected dense layer</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fns.pytorchcustom.field2PTW_model_definition.field2PTW.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fns.pytorchcustom.field2PTW_model_definition.field2PTW.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 

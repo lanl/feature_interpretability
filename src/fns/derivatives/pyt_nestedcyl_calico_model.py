@@ -36,7 +36,7 @@ import fns.pytorchcustom.calico as pytcalico
 def recurr_getattr(obj, attr: str, default=None):
 	""" Recursive getattr function; allowes 'attr' to contain '.'
 
-		| Taken from: https://programanddesign.com/python-2/recursive-getsethas-attr/
+		| Code from: https://programanddesign.com/python-2/recursive-getsethas-attr/
 
 		Args:
 			obj (object)
