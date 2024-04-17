@@ -15,7 +15,7 @@ Running Tests
    :alt: pytest terminal printout for all tests
    :align: center
 
-Test files are in ./tests. Tests are run from the outermost layer of the feature_interpretability directory, while in an enviroment with ``pytest`` installed.
+Test files are in ./tests. Tests are run from the outermost layer of the feature_interpretability directory, while in an enviroment with ``pytest`` installed. To use the ``--cov`` flag, `pytest-cov <https://pytest-cov.readthedocs.io/en/latest/index.html>`_  must be installed.
 
  - Run ``pytest`` to run all tests.
  - Run ``pytest --cov`` to run all tests and generate a coverage report on ``fns``.

@@ -73,10 +73,14 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Tools</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="enviroments.html">Enviroments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enviroments.html">Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing with Pytest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_scripts.html"><em>Test Scripts</em> Script</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#packages">Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-docs">Generating Docs</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -105,7 +109,30 @@
              
   <section id="documentation">
 <h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline"></a></h1>
-<p>The documentation for the feature interpretability module is made with <a class="reference external" href="https://www.sphinx-doc.org/en/master/">sphinx</a>. All of the files to make the sphinx documentation is found in <code class="docutils literal notranslate"><span class="pre">./docs/</span></code>. Source code is found in <code class="docutils literal notranslate"><span class="pre">./docs/source/</span></code>, while built <code class="docutils literal notranslate"><span class="pre">.html</span></code> files are found in <code class="docutils literal notranslate"><span class="pre">./docs/build/</span></code>.</p>
+<section id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline"></a></h2>
+<p>The documentation for the feature interpretability module is made with <a class="reference external" href="https://www.sphinx-doc.org/en/master/">sphinx</a>.</p>
+<p>Below is a list of <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/index.html">sphinx extensions</a> that are required to build the docs:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">sphinx.ext.autodoc</a></p></li>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/coverage.html">sphinx.ext.coverage</a></p></li>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html">sphinx.ext.napoleon</a></p></li>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/githubpages.html">sphinx.ext.githubpages</a></p></li>
+</ul>
+<p>Additionally, the <a class="reference external" href="https://sphinx-toolbox.readthedocs.io/en/stable/index.html">sphinx-toolbox</a> and <a class="reference external" href="https://sphinx-argparse.readthedocs.io/en/stable/install.html">sphinx-argparse</a> packages are installed to provide additional functionality. They are included in the extensions list as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://sphinx-toolbox.readthedocs.io/en/stable/extensions/collapse.html">sphinx_toolbox.collapse</a></p></li>
+<li><p>sphinxarg.ext</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p>These are all included in the <code class="docutils literal notranslate"><span class="pre">./docs/source/conf.py</span></code> file.</p>
+</section>
+<section id="generating-docs">
+<h2>Generating Docs<a class="headerlink" href="#generating-docs" title="Permalink to this headline"></a></h2>
+<p>All of the files to make the sphinx documentation is found in <code class="docutils literal notranslate"><span class="pre">./docs/</span></code>. Source code is found in <code class="docutils literal notranslate"><span class="pre">./docs/source/</span></code>, while built <code class="docutils literal notranslate"><span class="pre">.html</span></code> files are found in <code class="docutils literal notranslate"><span class="pre">./docs/build/</span></code>.</p>
 <p>To generate the most up-to-date documetaion, run the following commands in the <code class="docutils literal notranslate"><span class="pre">./docs/</span></code> directory:</p>
 <blockquote>
 <div><ul class="simple">
@@ -114,7 +141,8 @@
 <li><p>open <code class="docutils literal notranslate"><span class="pre">./docs/build/html/index.html</span></code> to view rendered docs</p></li>
 </ul>
 </div></blockquote>
-<p>Rendered documentation is <a class="reference external" href="https://lanl.github.io/feature_interpretability/html/index.html">hosted on GitHub</a>.</p>
+<p>Rendered documentation is also <a class="reference external" href="https://lanl.github.io/feature_interpretability/html/index.html">hosted on GitHub</a>.</p>
+</section>
 </section>
 
 

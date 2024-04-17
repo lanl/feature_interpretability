@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enviroments &mdash; Feature Interpretability 0.1 documentation</title>
+  <title>Environments &mdash; Feature Interpretability 0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -74,7 +74,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Tools</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Enviroments</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing with Pytest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_scripts.html"><em>Test Scripts</em> Script</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs.html">Documentation</a></li>
@@ -94,7 +94,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Enviroments</li>
+      <li class="breadcrumb-item active">Environments</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/dev/enviroments.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -104,10 +104,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="enviroments">
-<h1>Enviroments<a class="headerlink" href="#enviroments" title="Permalink to this headline"></a></h1>
+  <section id="environments">
+<h1>Environments<a class="headerlink" href="#environments" title="Permalink to this headline"></a></h1>
 <p>These interpretability tools are functioanl with both the <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf">tensorflow</a> ML package and the <a class="reference external" href="https://pytorch.org/docs/stable/index.html">pytorch</a> ML package. These two packages don’t tend to play nice with each other, so typically they must be kept in seperate enviorments. The user is responsible for activating the correct enviroments for the package they want to run.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">enviorments</span></code> directory contains <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files describing enviroments that were used to create and test the code library. However, it is reccomended that users create thier own enviroments as necessary.</p>
 <p>Here is a list of non-machinelearning packages used by the scripts. These should be installed regardless of which ML package is being used. This list may not contain all necessary packages; defer to what is imported in the scripts.</p>
 <blockquote>
 <div><ul class="simple">
