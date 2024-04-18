@@ -74,7 +74,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Tools</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="enviroments.html">Enviroments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enviroments.html">Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing with Pytest</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#"><em>Test Scripts</em> Script</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-test_scripts">Code Documentation</a></li>
@@ -115,17 +115,12 @@
 <h1><em>Test Scripts</em> Script<a class="headerlink" href="#test-scripts-script" title="Permalink to this headline"></a></h1>
 <p>The <em>test scripts</em> script runs all of the other scripts, including the feature derivative scripts, to check for bugs. This is not a full coverage test, and should not be taken as such. Instead, it is intended to catch simple bugs introduced in the fns module. It can also be used to check that the python enviroment has all of the required packages to run the feature interpretability module.</p>
 <p>This does not save any individual script output. It does print the time it took to run to the command line.</p>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>Nested cylinder examples are not currently included in the open source edition of this code. As such, when a script is passed <code class="docutils literal notranslate"><span class="pre">--EXPERIMENT</span> <span class="pre">nestedcylinder</span></code>, it raises a <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code>. Nested cylinder examples are expected to be added in February 2024.</p>
-</div>
 <section id="module-test_scripts">
 <span id="code-documentation"></span><h2>Code Documentation<a class="headerlink" href="#module-test_scripts" title="Permalink to this headline"></a></h2>
 <p>Runs all scripts to test for errors. Does not save script output.</p>
 <p>Input Line for Tensorflow Models on Coupon Data:
 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">test_scripts.py</span> <span class="pre">-P</span> <span class="pre">tensorflow</span> <span class="pre">-E</span> <span class="pre">coupon</span></code></p>
 <p>Input Line for PYT Nested Cylinder Models:
-CURRENTLY DEPRECATED
 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">test_scripts.py</span> <span class="pre">-P</span> <span class="pre">pytorch</span> <span class="pre">-E</span> <span class="pre">nestedcylinder</span></code></p>
 </section>
 <section id="arguments">

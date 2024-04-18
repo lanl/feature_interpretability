@@ -50,9 +50,8 @@ Each ``.npz`` nested cylinder data file contains the following fields:
 
  - *sim_time* (scalar): simulation time stamp corresponding to a unique *idx* value
  - *rho* (2D array): density training field (use ``-IN_FIELD rho``)
- - *hr_outerWall*, *hr_bottomWall*, *hr_mcSide*, *hr_mcBottom*, *hr_innerCylClide*, *hr_innerCylBottom*, *hr_MOI (2D arrays): density of simulation compoment
- - *hr_innerCylBottom*, *hr_innerCylCorner*, *hr_innerCylRight* (2D arrays): density of an inner cylinder component
- - *volhr_outerWall*, *volhr_bottomWall*, *volhr_mcSide*, *volhr_mcBottom*, *volhr_innerCylSide*, *volhr_innerCylBottom*, *volhr_MOI* (shape): thing
+ - *hr_outerWall*, *hr_bottomWall*, *hr_mcSide*, *hr_mcBottom*, *hr_innerCylClide*, *hr_innerCylBottom*, *hr_MOI*, *hr_innerCylBottom*, *hr_innerCylCorner*, *hr_innerCylRight* (2D arrays): density of simulation compoments
+ - *volhr_outerWall*, *volhr_bottomWall*, *volhr_mcSide*, *volhr_mcBottom*, *volhr_innerCylSide*, *volhr_innerCylBottom*, *volhr_MOI* (2D array): volume average density of similation components
  - *pressure* (2D array)
  - *temperature* (2D array)
  - *melt_state* (2D array): binary array of if a cell has melted

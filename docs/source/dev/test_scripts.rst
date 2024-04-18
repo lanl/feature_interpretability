@@ -6,10 +6,6 @@ The *test scripts* script runs all of the other scripts, including the feature d
 
 This does not save any individual script output. It does print the time it took to run to the command line.
 
-.. attention::
-   
-   Nested cylinder examples are not currently included in the open source edition of this code. As such, when a script is passed ``--EXPERIMENT nestedcylinder``, it raises a ``NotImplementedError``. Nested cylinder examples are expected to be added in February 2024.
-
 Code Documentation
 ===================
 
