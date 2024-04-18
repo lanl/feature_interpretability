@@ -6,7 +6,6 @@ Input Line for Tensorflow Models on Coupon Data:
 ``python test_scripts.py -P tensorflow -E coupon``
 
 Input Line for PYT Nested Cylinder Models:
-CURRENTLY DEPRECATED
 ``python test_scripts.py -P pytorch -E nestedcylinder``
 """
 
@@ -73,9 +72,9 @@ if __name__ == '__main__':
 		L = 'activation_15'
 
 	elif PACKAGE=='pytorch':
-		M = '../examples/pyt_nestedcyl/trained_hrMOICyl2sclPTW_model.pth'
-		IF = 'hr_MOICyl'
-		L = 'interpActivations.14'
+		M = '../examples/pyt_nestedcyl/trained_rho2PTW_model.pth'
+		IF = 'rho'
+		L = 'interp_module.interpActivations.10'
 
 	## Define experiment-dependent input arguments
 	if EXP == 'coupon':
@@ -85,8 +84,7 @@ if __name__ == '__main__':
 		NF = '../examples/tf_coupon/coupon_normalization.npz'
 
 	elif EXP == 'nestedcylinder':
-		raise NotImplementedError('Nested cylinder examples not included in open source.')
-		IN = '../examples/pyt_nestedcyl/data/ncyl_sclPTW_327_pvi_idx00130.npz'
+		IN = '../examples/pyt_nestedcyl/data/nc231213_Sn_id0643_pvi_idx00112.npz'
 		ID = '../examples/pyt_nestedcyl/data/'
 		DF = '../examples/pyt_nestedcyl/nestedcyl_design_file.csv'
 		NF = '' #input not required for nested cylinder experiment 
