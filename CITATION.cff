@@ -1,0 +1,28 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Feature Interpretability
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Skylar
+    family-names: Callis
+    email: sjcallis@lanl.gov
+    affiliation: Los Alamos National Laboratory
+    orcid: 'https://orcid.org/0009-0009-4133-377X'
+repository-code: 'https://github.com/lanl/feature_interpretability'
+url: >-
+  https://lanl.github.io/feature_interpretability/html/index.html
+abstract: >-
+  Tools for neural network interpretability by examining
+  internal model states (features) in both Python TensorFlow
+  and PyTorch 
+keywords:
+  - machine learning
+  - pytorch
+  - tensorflow
+  - interpretability
+license: BSD-3-Clause
